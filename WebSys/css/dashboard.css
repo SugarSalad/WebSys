@@ -46,6 +46,7 @@ th {
 }
 
 .action-buttons {
+    text-align: center;
     display: flex;
     gap: 5px;
 }
