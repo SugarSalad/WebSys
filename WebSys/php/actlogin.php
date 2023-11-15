@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Check user level and redirect accordingly
         if ($_SESSION['Level'] === 'User') {
-            header("Location: ../User.php");
+            header("Location: ../UserForm.php");
             exit();
         } elseif ($_SESSION['Level'] === 'Admin') {
             header("Location: ../Dashboard.php");
