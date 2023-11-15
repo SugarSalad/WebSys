@@ -9,9 +9,11 @@
 <body>
     <div id="sidebar">
         <h2>DASHBORAD</h2><br/><br/><br/>
-        <button class='button1'>Button1</button><br /><br/><br/>
-        <button class='button2'>Button2</button><br /><br/><br/>
-        <button class='button3'>Button3</button><br /><br/><br/>
+        <button class='viewReport'>View Report</button><br /><br/><br/>
+        <button class='createBill'>Create Bill</button><br /><br/><br/>
+        <button class='createAccount'>Create Account</button><br /><br/><br/>
+        <button class='manageAccounts'>Manage Accounts</button><br /><br/><br/>
+        <button class='logout'>Logout</button><br /><br/><br/>
     </div>
 
     <div id="content">

@@ -27,6 +27,7 @@ table {
     width: 100%;
     margin-bottom: 20px;
     border: 1px solid #ddd;
+    table-layout: fixed;
 }
 
 h1, h2{
@@ -65,15 +66,31 @@ th {
     background-color: #777;
 }
 
-.button1:hover,
-.button2:hover,
-.button3:hover{
+.viewReport:hover,
+.createBill:hover,
+.createAccount:hover,
+.manageAccounts:hover{
     background-color: #777;
 }
 
-.button1,
-.button2,
-.button3{
+.viewReport,
+.createBill,
+.createAccount,
+.manageAccounts{
+    padding: 30px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.logout:hover {
+    background-color: #ee0c0c;
+}
+.logout{
+    margin-top: auto;
     padding: 30px;
     background-color: #555;
     color: white;
