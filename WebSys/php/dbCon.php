@@ -1,8 +1,17 @@
-<?php
-$host = 'localhost';
-$dbname = 'wst_project';
-$username = 'root';
-$password = '';
+<?php 
 
-$pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //Login Credentials to XAMPP
+    $sname = "localhost";
+    $uname = "root";
+    $password = "";
+
+    //Database Name
+    $dbName = "water";
+
+    $conn = mysqli_connect($sname, $uname, $password, $dbName);
+
+    if ($conn->connect_error) {
+        die("Connection Failed".$conn->connect_error);
+    }
+
+?>

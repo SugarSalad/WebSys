@@ -15,7 +15,7 @@
             echo '<p class="error">' . $error_message . '</p>';
         }
         ?>
-        <form method="post" action="">
+        <form method="post" action="./php/actlogin.php">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Submit</button>
