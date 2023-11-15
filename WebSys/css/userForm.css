@@ -1,0 +1,88 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+
+body{
+  margin:auto;
+  scroll-snap-type: y mandatory;
+}
+
+.whole-container {
+  position: relative;
+    max-width: 70%;
+    width: 100%;
+    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    max-height: calc(100vh - 56px);
+      overflow-y: auto;
+    margin:auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    box-shadow: 10px 10px 30px grey;
+}
+h1{
+    text-align: center;
+
+}
+
+
+/* ------------------- Student Information Banner Here ---------------------------------*/
+
+.banner {
+  display:grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.studentInfo-text1 {
+  margin-top: 50px;
+  margin-left: 50px;
+ 
+  font-size: 18px;
+  display: inline;
+}
+
+.studentInfo-text2 {
+  margin-top: 50px;
+  margin-left: 800px;
+
+  font-size: 18px;
+  display: inline;
+}
+
+ span .text-label {
+  display: inline-block;
+}
+
+span .text-info{
+  display: inline-flex;
+}
+
+/* Table start here */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 50px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}

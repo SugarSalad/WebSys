@@ -20,11 +20,18 @@ h2 {
 }
 
 form {
-    background-color: #eaeff0;
+   position: relative;
+    max-width: 30%;
+    width: 100%;
+    background: #f9f9f9;
+    padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 500px;
+    max-height: calc(100vh - 56px);
+      overflow-y: auto;
+    margin:auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    box-shadow: 10px 10px 30px grey;
 }
 
 label {
