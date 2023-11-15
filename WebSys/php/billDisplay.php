@@ -39,8 +39,8 @@ while ($row = $result->fetch_assoc()) {
                 <th>Date</th>
                 <th>Amount</th>
                 <th>Status</th>
-                <th>Action</th>
-                <th>Action</th>
+                <th>    </th>
+                <th>    </th>
             </tr>
         </thead>
         <tbody>
@@ -50,10 +50,10 @@ while ($row = $result->fetch_assoc()) {
                 foreach ($row as $value) {
                     echo "<td>$value</td>";
                 }
-                echo "<td class='action-buttons'>
+                echo "<td style = text-align: center; display: flex; gap: 5px;'>
                         <button class='updateButton'>Update</button>
                       </td>";
-                echo "<td class='action-buttons'>
+                echo "<td style = text-align: center; display: flex; gap: 5px;'>
                         <button class='deleteButton'>Delete</button>
                       </td>";
                 echo "</tr>";
