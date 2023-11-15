@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 15, 2023 at 08:35 AM
+-- Generation Time: Nov 15, 2023 at 01:28 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -25,6 +25,22 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `SP_DeleteBill`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteBill` (IN `id` INT)   DELETE FROM tbl_bill WHERE tbl_bill.BillID = id$$
+
+DROP PROCEDURE IF EXISTS `SP_DisplayBill`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DisplayBill` ()   SELECT
+    tbl_bill.BillID,
+    tbl_costumer.Name,
+    tbl_costumer.HouseNumber,
+    tbl_bill.Date,
+    tbl_bill.Amount,
+    tbl_bill.Status
+FROM
+    tbl_bill
+INNER JOIN
+    tbl_costumer ON tbl_bill.UserID = tbl_costumer.UserID$$
+
 DROP PROCEDURE IF EXISTS `SP_GetAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAccount` (IN `id` VARCHAR(50), IN `password` VARCHAR(255))   SELECT
     tbl_account.AccountID,
@@ -57,14 +73,15 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
   `Level` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`AccountID`),
   KEY `UserID_fk_Customer` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_account`
 --
 
 INSERT INTO `tbl_account` (`AccountID`, `UserID`, `Username`, `Password`, `Level`) VALUES
-(4, 1, 'cyrus', 'pogi', 'Admin');
+(4, 1, 'cyrus', 'pogi', 'Admin'),
+(5, 2, 'jomar', 'reyes', 'User');
 
 -- --------------------------------------------------------
 
@@ -78,16 +95,18 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
   `UserID` int NOT NULL,
   `Date` date NOT NULL,
   `Amount` float NOT NULL,
+  `Status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`BillID`),
   KEY `UserID_fk_Bill` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_bill`
 --
 
-INSERT INTO `tbl_bill` (`BillID`, `UserID`, `Date`, `Amount`) VALUES
-(1, 1, '2023-11-15', 500);
+INSERT INTO `tbl_bill` (`BillID`, `UserID`, `Date`, `Amount`, `Status`) VALUES
+(1, 1, '2023-11-15', 500, 'Paid'),
+(3, 2, '2023-11-02', 688.55, 'Unpaid');
 
 -- --------------------------------------------------------
 
