@@ -21,14 +21,12 @@ while ($row = $result->fetch_assoc()) {
     $row['Amount'] = '₱' . number_format($row['Amount'], 2);
 
     $data[] = array(
-        $row['BillID'],
-        $row['Name'],
-        $row['HouseNumber'],
-        $row['Date'],
-        $row['Amount'],
-        $row['Status'],
-
-        
+        'BillID' => isset($row['BillID']) ? $row['BillID'] : '',
+        'Name' => isset($row['Name']) ? $row['Name'] : '',
+        'HouseNumber' => isset($row['HouseNumber']) ? $row['HouseNumber'] : '',
+        'Date' => isset($row['Date']) ? $row['Date'] : '',
+        'Amount' => isset($row['Amount']) ? $row['Amount'] : '',
+        'Status' => isset($row['Status']) ? $row['Status'] : '',
     );
 }
 
@@ -45,21 +43,20 @@ while ($row = $result->fetch_assoc()) {
                 <th>Date</th>
                 <th>Amount</th>
                 <th>Status</th>
-                <th>    </th>
-                <th>    </th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($data as $row) {
-                echo "<tr>";
+                echo "<tr data-vio-id='" . $row['BillID'] . "'>";
                 foreach ($row as $value) {
                     echo "<td>$value</td>";
                 }
-                echo "<td style = text-align: center; display: flex; gap: 4px;'>
+                echo "<td style='text-align: center; display: flex; gap: 4px;'>
                         <button class='updateButton'>Update</button>
                       </td>";
-                echo "<td style = text-align: center; display: flex; gap: 4px;'>
+                echo "<td style='text-align: center; display: flex; gap: 4px;'>
                         <button class='deleteButton'>Delete</button>
                       </td>";
                 echo "</tr>";
