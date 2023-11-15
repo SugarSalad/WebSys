@@ -18,12 +18,17 @@ if (!$result) {
 // Fetch the data
 $data = array();
 while ($row = $result->fetch_assoc()) {
+    $row['Amount'] = '₱' . number_format($row['Amount'], 2);
+
     $data[] = array(
+        $row['BillID'],
         $row['Name'],
         $row['HouseNumber'],
         $row['Date'],
         $row['Amount'],
-        $row['Status']
+        $row['Status'],
+
+        
     );
 }
 
@@ -34,6 +39,7 @@ while ($row = $result->fetch_assoc()) {
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>HouseNumber</th>
                 <th>Date</th>
@@ -50,10 +56,10 @@ while ($row = $result->fetch_assoc()) {
                 foreach ($row as $value) {
                     echo "<td>$value</td>";
                 }
-                echo "<td style = text-align: center; display: flex; gap: 5px;'>
+                echo "<td style = text-align: center; display: flex; gap: 4px;'>
                         <button class='updateButton'>Update</button>
                       </td>";
-                echo "<td style = text-align: center; display: flex; gap: 5px;'>
+                echo "<td style = text-align: center; display: flex; gap: 4px;'>
                         <button class='deleteButton'>Delete</button>
                       </td>";
                 echo "</tr>";
