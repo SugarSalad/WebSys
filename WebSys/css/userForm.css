@@ -8,22 +8,17 @@
   font-family:'Poppins',sans-serif;
 }
 
-*::-webkit-scrollbar {
-  display: none;
-}
-
 
 body{
   margin:auto;
-  scroll-snap-type: y mandatory;
 }
 
 .whole-container {
-  position: relative;
+  position: absolute;
     max-width: 70%;
     width: 100%;
     background: #f9f9f9;
-    padding: 25px;
+    padding: 100px;
     border-radius: 8px;
     max-height: calc(100vh - 56px);
       overflow-y: auto;
@@ -31,14 +26,45 @@ body{
     margin-top: 25px;
     margin-bottom: 25px;
     box-shadow: 10px 10px 30px grey;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
+
 h1{
     text-align: center;
 
 }
 
+/* Add these styles to your existing CSS file or <style> tag */
 
-/* ------------------- Student Information Banner Here ---------------------------------*/
+/* Position the button */
+.logout-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 20px 30px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 999; /* Ensure it's above other elements */
+}
+
+.logout-button:hover{
+  background-color: #ee0c0c;
+}
+
+/* Style on hover */
+.logout-button {
+  background-color: #555;
+}
+
+
+
+/* ------------------- Billing Information Banner Here ---------------------------------*/
 
 .banner {
   display:grid;

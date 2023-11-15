@@ -45,6 +45,8 @@
                 </tr>
             </tbody>
         </table>
+
     </div>
+    <button class="logout-button">Logout</button>
 </body>
 </html>
