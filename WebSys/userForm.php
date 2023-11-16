@@ -1,3 +1,5 @@
+<?php require "./php/authenticateaccount.php" ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,22 +15,26 @@
         <!------------- Billers Information ------------------> 
         <div class="banner">
             <div class="studentInfo-text1">
-                <span class="text-label" style="font-weight: bold;">Name:</span><br/><br/>
+                <span class="text-label" style="font-weight: bold;">Name:</span><br/>
+                <span class="text-info" id="name"><?php echo $_SESSION['Name']; ?></span><br><br><br>
                 <div class="studentInfo-text">
-                    <span class="text-label" style="font-weight: bold;">Email:</span><br/><br/>
+                    <span class="text-label" style="font-weight: bold;">Email:</span><br/>
+                    <span class="text-info" id="email"><?php echo $_SESSION['Email']; ?></span><br><br><br>
                 </div>
             </div>
             <div class="studentInfo-text2">
                 <div class="studentInfo-text">
-                    <span class="text-label" style="font-weight: bold;">House Number:</span><br/><br/>
+                    <span class="text-label" style="font-weight: bold;">House Number:</span><br/>
+                    <span class="text-info" id="HouseNum"><?php echo $_SESSION['HouseNumber']; ?></span><br><br><br>
                 </div>
                 <div class="studentInfo-text">
-                    <span class="text-label" style="font-weight: bold;">Gender:</span><br/><br/>
+                    <span class="text-label" style="font-weight: bold;">Gender:</span><br/>
+                    <span class="text-info" id="Sex"><?php echo $_SESSION['Sex']; ?></span><br><br><br>
                 </div>
             </div>
         </div>
-                <!-- Table starts here -->
-                <table>
+        <!-- Table starts here -->
+        <table>
             <thead>
                 <tr>
                     <th>Date</th>
@@ -45,8 +51,8 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
-    <button class="logout-button">Logout</button>
+    <a href="./php/logoutUser.php" class="logout-button">Logout</a>
 </body>
 </html>
+

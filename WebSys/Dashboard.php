@@ -1,3 +1,5 @@
+<?php require "./php/authenticateaccount.php" ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
