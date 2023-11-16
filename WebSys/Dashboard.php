@@ -24,10 +24,13 @@
         <a href="./php/logoutAdmin.php" class='logout'>Logout</a><br /><br/><br/>
     </div>
 
-    <?php
+
+
+    <?php 
     // Include the file that displays the Modal or Update Bill popup
     include './php/modal.php'; 
     ?>
+
 
     <?php
     // Include the file that displays the bill
@@ -37,10 +40,9 @@
 
  <div id="content">
     <h1>Pansol Rural Association Billing System</h1>
-    <div id="table-container">
-        <table>
-            <thead>
-                <tr>
+    <table>
+        <thead>
+            <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>HouseNumber</th>
@@ -66,9 +68,8 @@
                 echo  "</td>";
             }
             ?>
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
  </div>
 
  <script src="./js/modal.js"></script>
