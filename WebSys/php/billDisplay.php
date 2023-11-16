@@ -1,6 +1,4 @@
 <?php
-// Start Session
-session_start();
 // Database Connection
 require "./php/dbCon.php";
 
