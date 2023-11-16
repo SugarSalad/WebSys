@@ -22,7 +22,7 @@
     <input type="date" id="date" name="date" required><br><br>
 
     <label for="currentReading">Current Meter Reading:</label>
-    <input type="number" id="currentReading" name="currentReading" required><br><br>
+    <input type="number" id="currentReading" name="currentReading" step="any" required><br><br>
 
     <label for="amount">Amount:</label>
 <input type="number" id="amount" name="amount" step="any" required><br><br>

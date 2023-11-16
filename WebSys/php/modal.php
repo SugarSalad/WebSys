@@ -7,7 +7,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form method="post" id="contactFrm">
+            <form method="post" action="./php/updateBill.php" id="contactFrm">
             <div class="modal-body">
                 <!-- Form submission status -->
                 <div class="response"></div>
@@ -25,12 +25,12 @@
 
                 <div class="form-group">
                     <label for="currentReading">Current Meter Reading:</label>
-                    <input type="number" id="currentReading" name="currentReading" required><br><br>
+                    <input type="number" id="currentReading" name="currentReading" step="any" required><br><br>
                 </div>
 
                 <div class="form-group">
                     <label for="amount">Amount:</label>
-                    <input type="number" id="amount" name="amount" required><br><br>
+                    <input type="number" id="amount" name="amount" step="any" required><br><br>
                 </div>
 
                 <div class="form-group">
