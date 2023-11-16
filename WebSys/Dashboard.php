@@ -23,14 +23,16 @@
     </div>
 
 
-    <?php
-    // Include the file that displays the bill
-    require "./php/billDisplay.php";
+
+    <?php 
+    // Include the file that displays the Modal or Update Bill popup
+    include './php/modal.php'; 
     ?>
+
 
     <?php
     // Include the file that displays the bill
-    require "./modal.php";
+    require "./php/billDisplay.php";
     ?>
 
 
@@ -66,5 +68,7 @@
         </tbody>
     </table>
  </div>
+
+ <script src="./js/modal.js"></script>
 </body>
 </html>
