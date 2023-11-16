@@ -39,6 +39,7 @@
             <thead>
                 <tr>
                     <th>Date</th>
+                    <th>Meter</th>
                     <th>Amount</th>
                     <th>Status</th>
                 </tr>
@@ -47,6 +48,7 @@
             <?php foreach ($billData as $bill) : ?>
             <tr> 
                 <td><?php echo $bill['Date']; ?></td>
+                <td><?php echo $bill['Meter']; ?></td>
                 <td><?php echo $bill['Amount']; ?></td>
                 <td><?php echo $bill['Status']; ?></td>
             </tr>

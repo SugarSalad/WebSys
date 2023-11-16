@@ -46,6 +46,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>HouseNumber</th>
+                <th>Meter</th>
                 <th>Date</th>
                 <th>Amount</th>
                 <th>Status</th>

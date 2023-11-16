@@ -22,6 +22,7 @@ while ($row = $result->fetch_assoc()) {
         'BillID' => isset($row['BillID']) ? $row['BillID'] : '',
         'Name' => isset($row['Name']) ? $row['Name'] : '',
         'HouseNumber' => isset($row['HouseNumber']) ? $row['HouseNumber'] : '',
+        'Meter' => isset($row['Meter']) ? $row['Meter'] : '',
         'Date' => isset($row['Date']) ? $row['Date'] : '',
         'Amount' => isset($row['Amount']) ? $row['Amount'] : '',
         'Status' => isset($row['Status']) ? $row['Status'] : '',
