@@ -6,7 +6,10 @@ body {
 }
 
 #sidebar {
-    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; /* Span from top to bottom of the viewport */
     width: 250px;
     background-color: #333;
     color: white;
@@ -17,9 +20,15 @@ body {
 }
 
 #content {
-    flex: 1;
+    margin-left: 250px; /* Adjust the margin to account for sidebar width and space */
     padding: 20px;
-    position: relative;
+    box-sizing: border-box;
+
+}
+
+#table-container {
+    max-height: calc(100vh - 100px); /* Adjust as necessary, considering other elements' heights */
+    overflow-y: auto;
 }
 
 table {
