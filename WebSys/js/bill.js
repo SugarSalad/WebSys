@@ -1,4 +1,3 @@
-// Assuming you have included jQuery library
 $(document).ready(function() {
     // Attach a click event handler to the delete buttons
     $('.delete-button').on('click', function() {
@@ -62,6 +61,7 @@ $(document).ready(function() {
 
         // Serialize the form data
         var formData = $(this).serialize();
+        formData += '&billId=' + $('#billID').val();
 
         $.ajax({
             type: 'POST',
@@ -73,41 +73,14 @@ $(document).ready(function() {
                 // Handle the response from the server
                 alert(response); // Display a message or update the UI as needed
 
-                // Reload the page or perform any other action after successful update
+                // Reload the page or perform any other action after a successful update
                 location.reload();
+
+                // Move this line inside the success callback if you want to log the BillID after a successful update
+                console.log('BillID:', $('#billID').val());
             },
             error: function (xhr, status, error) {
                 console.error('AJAX request failed:', status, error);
-            }
-        });
-
-        // Move this line inside the success callback if you want to log the BillID after successful update
-        console.log('BillID:', $('#billID').val());
-    });
-    
-    $('#updateModalButton').click(function () {
-        // Collect updated data
-        var updatedData = {
-            billID: $('#billID').val(),
-            name: $('#name').val(),
-            date: $('#date').val(),
-            meter: $('#currentReading').val(),
-            amount: $('#amount').val(),
-            status: $('#status').val(),
-        };
-
-        // Make an AJAX request to update the data
-        $.ajax({
-            type: 'POST',
-            url: './php/updateBill.php', // Replace with the actual path to your update PHP file
-            data: updatedData,
-            success: function (response) {
-                console.log('Update success:', response);
-                // You can handle success response here, e.g., close the modal or show a success message
-            },
-            error: function (xhr, status, error) {
-                console.log('Update error:', xhr, status, error);
-                // You can handle error response here, e.g., show an error message
             }
         });
     });

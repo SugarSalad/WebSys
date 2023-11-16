@@ -11,6 +11,9 @@
             <div class="modal-body">
                 <!-- Form submission status -->
                 <div class="response"></div>
+
+                 <!-- Hidden input for Bill ID -->
+                 <input type="hidden" id="billID" name="billId" hidden required>
                 
                 <!-- Contact form -->
                 <div class="form-group">
