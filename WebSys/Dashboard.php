@@ -54,18 +54,27 @@
             </tr>
         </thead>
         <tbody>
-            <?php
+            
+        <?php
             foreach ($data as $row) {
-                echo "<tr data-bill-id='" . $row['BillID'] . "'>";
+                echo "<tr data-bill-id='" . $row['BillID'] . "' data-name='" . $row['Name'] . "' data-house-number='" . 
+                $row['HouseNumber'] . "' data-meter='" . $row['Meter'] . "' data-date='" . $row['Date'] . "' data-amount='" . 
+                $row['Amount'] . "' data-status='" . $row['Status'] . "'>";
+
                 foreach ($row as $value) {
                     echo "<td>$value</td>";
                 }
+
                 echo "<td style='text-align: center; display: flex; gap: 4px;'>";
-                echo       "<button id='mbtn' class='btn btn-primary turned-button'>Update</button>";
-                echo    "</td>";
+                // Inside the foreach loop in Dashboard.php
+                echo "<button class='update-button btn btn-primary turned-button' data-bill-id='" . $row['BillID'] . "'>Update</button>";
+                echo "</td>";
+
                 echo "<td style='text-align: center; display: flex; gap: 4px;'>";
-                echo    "<button class='delete-button' data-bill-id='" . $row['BillID'] . "'>Delete</button>";
-                echo  "</td>";
+                echo "<button class='delete-button' data-bill-id='" . $row['BillID'] . "'>Delete</button>";
+                echo "</td>";
+
+                echo "</tr>";
             }
             ?>
         </tbody>

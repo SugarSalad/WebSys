@@ -1,4 +1,14 @@
 $(document).ready(function () {
+
+    function getCurrentDate() {
+        const now = new Date();
+        const formattedDate = now.toISOString().split('T')[0];
+        return formattedDate;
+    }
+
+    // Set the current date to the date input field
+    $('#date').val(getCurrentDate());
+
     // Your form submission logic
     $('form').submit(function (event) {
         event.preventDefault();

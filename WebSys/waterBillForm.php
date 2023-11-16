@@ -25,7 +25,7 @@
     <input type="number" id="currentReading" name="currentReading" required><br><br>
 
     <label for="amount">Amount:</label>
-    <input type="number" id="amount" name="amount" required><br><br>
+<input type="number" id="amount" name="amount" step="any" required><br><br>
 
     <label for="status">Status:</label>
     <select id="status" name="status" required>

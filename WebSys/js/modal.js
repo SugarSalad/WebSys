@@ -5,7 +5,7 @@
 var modal = $('#modalDialog');
 
 // Get the button that opens the modal
-var btn = $("#mbtn");
+var btn = $(".update-button");
 
 // Get the  element that closes the modal
 var span = $(".close");
