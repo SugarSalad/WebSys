@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 16, 2023 at 11:13 AM
+-- Generation Time: Nov 16, 2023 at 02:57 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -133,17 +133,17 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
   `Status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`BillID`),
   KEY `UserID_fk_Bill` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_bill`
 --
 
 INSERT INTO `tbl_bill` (`BillID`, `UserID`, `Date`, `Meter`, `Amount`, `Status`) VALUES
-(7, 2, '2023-09-06', 124, 760.12, 'Paid'),
 (8, 3, '2023-11-08', 125, 900.12, 'Unpaid'),
 (9, 2, '2023-09-05', 126, 980.55, 'Paid'),
-(10, 3, '2023-07-04', 127, 380.32, 'Paid');
+(10, 3, '2023-07-04', 127, 380.32, 'Paid'),
+(75, 3, '2023-11-16', 126, 1000, 'Paid');
 
 -- --------------------------------------------------------
 
