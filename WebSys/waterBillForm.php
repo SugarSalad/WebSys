@@ -1,3 +1,4 @@
+<?php require "./php/authenticateaccount.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="./css/billForm.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="./js/buttonFunction.js"></script>
-
+    <script src="./js/createbill.js"></script>
 </head>
 <body>
 <h2>Water Bill Form</h2>
+<div id="statusMessage"></div>
 <div id="waterBillForm">
-<form method="post" action="process_form.php">
+<form method="post" action="./php/createbill.php">
     <label for="name">Customer Name:</label>
     <input type="text" id="name" name="name" required><br><br>
 
@@ -41,7 +43,8 @@
         <button class='createBill'>Create Bill</button><br /><br/><br/>
         <button class='createAccount'>Create Account</button><br /><br/><br/>
         <button class='manageAccounts'>Manage Accounts</button><br /><br/><br/>
-        <button class='logout'>Logout</button><br /><br/><br/>
+        <a href="./php/logoutAdmin.php" class='logout'>Logout</a><br /><br/><br/>
     </div>
+
 </body>
 </html>

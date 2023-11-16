@@ -17,7 +17,7 @@ if (!$result) {
 $data = array();
 while ($row = $result->fetch_assoc()) {
     $row['Amount'] = '₱' . number_format($row['Amount'], 2);
-
+    $row['Meter'] = number_format($row['Meter']);
     $data[] = array(
         'BillID' => isset($row['BillID']) ? $row['BillID'] : '',
         'Name' => isset($row['Name']) ? $row['Name'] : '',

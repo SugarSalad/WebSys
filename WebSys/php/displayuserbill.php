@@ -18,6 +18,12 @@ if (isset($_SESSION['UserID'])) {
     if ($result) {
         // Fetch the result as an associative array
         while ($row = $result->fetch_assoc()) {
+            // Format the amount with peso sign and commas
+            $row['Amount'] = '₱' . number_format($row['Amount'], 2);
+
+            // Add a comma for meter when it reaches 4 digits
+            $row['Meter'] = number_format($row['Meter']);
+
             $billData[] = $row;
         }
     } else {

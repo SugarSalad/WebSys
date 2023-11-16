@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 15, 2023 at 01:28 PM
+-- Generation Time: Nov 16, 2023 at 11:13 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -25,6 +25,12 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `SP_CreateBill`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateBill` (IN `p_userID` INT, IN `p_date` DATE, IN `p_meter` INT, IN `p_amount` DECIMAL(10,2), IN `p_status` VARCHAR(255))   BEGIN
+    INSERT INTO tbl_bill (UserID, Date, Meter, Amount, Status)
+    VALUES (p_userID, p_date, p_meter, p_amount, p_status);
+END$$
+
 DROP PROCEDURE IF EXISTS `SP_DeleteBill`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteBill` (IN `id` INT)   DELETE FROM tbl_bill WHERE tbl_bill.BillID = id$$
 
@@ -34,12 +40,23 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DisplayBill` ()   SELECT
     tbl_costumer.Name,
     tbl_costumer.HouseNumber,
     tbl_bill.Date,
+    tbl_bill.Meter,
     tbl_bill.Amount,
     tbl_bill.Status
 FROM
     tbl_bill
 INNER JOIN
     tbl_costumer ON tbl_bill.UserID = tbl_costumer.UserID$$
+
+DROP PROCEDURE IF EXISTS `SP_DisplayUserBill`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DisplayUserBill` (IN `id` INT)   SELECT
+tbl_bill.Meter,
+tbl_bill.Date,
+tbl_bill.Amount,
+tbl_bill.Status
+FROM tbl_bill
+INNER JOIN tbl_costumer ON tbl_bill.UserID = tbl_costumer.UserID
+WHERE tbl_bill.UserID = id$$
 
 DROP PROCEDURE IF EXISTS `SP_GetAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAccount` (IN `id` VARCHAR(50), IN `password` VARCHAR(255))   SELECT
@@ -55,6 +72,22 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAccount` (IN `id` VARCHAR(50)
 FROM tbl_account
 INNER JOIN tbl_costumer ON tbl_account.UserID = tbl_costumer.UserID
 WHERE tbl_account.Username = id AND tbl_account.Password = password$$
+
+DROP PROCEDURE IF EXISTS `SP_GetName`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetName` (IN `p_name` VARCHAR(255), OUT `p_userID` INT)   BEGIN
+    SELECT UserID INTO p_userID
+    FROM tbl_costumer
+    WHERE Name = p_name;
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_GetUser`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetUser` (IN `id` INT)   SELECT
+tbl_costumer.Name,
+tbl_costumer.HouseNumber,
+tbl_costumer.Sex,
+tbl_costumer.Email
+FROM tbl_costumer
+WHERE tbl_costumer.UserID = id$$
 
 DELIMITER ;
 
@@ -73,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
   `Level` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`AccountID`),
   KEY `UserID_fk_Customer` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_account`
@@ -81,7 +114,8 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
 
 INSERT INTO `tbl_account` (`AccountID`, `UserID`, `Username`, `Password`, `Level`) VALUES
 (4, 1, 'cyrus', 'pogi', 'Admin'),
-(5, 2, 'jomar', 'reyes', 'User');
+(5, 2, 'jomar', 'reyes', 'User'),
+(6, 3, 'kim', 'pao', 'User');
 
 -- --------------------------------------------------------
 
@@ -94,19 +128,22 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
   `BillID` int NOT NULL AUTO_INCREMENT,
   `UserID` int NOT NULL,
   `Date` date NOT NULL,
+  `Meter` float NOT NULL,
   `Amount` float NOT NULL,
   `Status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`BillID`),
   KEY `UserID_fk_Bill` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_bill`
 --
 
-INSERT INTO `tbl_bill` (`BillID`, `UserID`, `Date`, `Amount`, `Status`) VALUES
-(1, 1, '2023-11-15', 500, 'Paid'),
-(3, 2, '2023-11-02', 688.55, 'Unpaid');
+INSERT INTO `tbl_bill` (`BillID`, `UserID`, `Date`, `Meter`, `Amount`, `Status`) VALUES
+(7, 2, '2023-09-06', 124, 760.12, 'Paid'),
+(8, 3, '2023-11-08', 125, 900.12, 'Unpaid'),
+(9, 2, '2023-09-05', 126, 980.55, 'Paid'),
+(10, 3, '2023-07-04', 127, 380.32, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -122,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `tbl_costumer` (
   `Sex` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_costumer`
@@ -130,7 +167,8 @@ CREATE TABLE IF NOT EXISTS `tbl_costumer` (
 
 INSERT INTO `tbl_costumer` (`UserID`, `Name`, `HouseNumber`, `Sex`, `Email`) VALUES
 (1, 'Cyrus E. Tapalla', '187-A', 'Male', 'cyrusthetapalla25@gmail.com'),
-(2, 'Jomar Reyes', '186-B', 'Male', 'jomar@gmail.com');
+(2, 'Jomar Reyes', '186-B', 'Male', 'jomar@gmail.com'),
+(3, 'Kim Paolo Cuenca', '199-C', 'Male', 'pao@gmail.com');
 
 --
 -- Constraints for dumped tables
