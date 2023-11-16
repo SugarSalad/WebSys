@@ -34,6 +34,7 @@
             </div>
         </div>
         <!-- Table starts here -->
+<?php include "./php/displayuserbill.php" ?>
         <table>
             <thead>
                 <tr>
@@ -43,12 +44,13 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Sample Data-->
-                <tr> 
-                    <td>11/15/2023</td>
-                    <td>1000000000</td>
-                    <td>Unpaid</td>
-                </tr>
+            <?php foreach ($billData as $bill) : ?>
+            <tr> 
+                <td><?php echo $bill['Date']; ?></td>
+                <td><?php echo $bill['Amount']; ?></td>
+                <td><?php echo $bill['Status']; ?></td>
+            </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
