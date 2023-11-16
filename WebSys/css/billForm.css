@@ -1,5 +1,5 @@
 body {
-    font-family: Montserrat;
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -19,7 +19,7 @@ h2 {
     margin-top: 20px;
 }
 
-form {
+#waterBillForm {
    position: relative;
     max-width: 30%;
     width: 100%;
@@ -88,4 +88,61 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #0056b3;
+}
+
+
+/*------------Side Bar-----------*/
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; /* Span from top to bottom of the viewport */
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+h3{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.viewReport:hover,
+.createBill:hover,
+.createAccount:hover,
+.manageAccounts:hover {
+    background-color: #777;
+}
+
+.viewReport,
+.createBill,
+.createAccount,
+.manageAccounts {
+    padding: 30px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.logout:hover {
+    background-color: #ee0c0c;
+}
+
+.logout {
+    margin-top: auto;
+    padding: 30px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
 }
