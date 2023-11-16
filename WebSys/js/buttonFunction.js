@@ -36,22 +36,4 @@
             $('.createBill').on('click', function() {
                 // Functionality for Create Bill button if needed
             });
-
-            // Other buttons' functionalities can be similarly added here
-        });
-
-
-
-        /* Function for View update Button */
-        $(document).ready(function() {
-            // Show the update bill form as a pop-up when the page loads
-            $('#overlay').fadeIn();
-            $('#updateBillContainer').fadeIn();
-        
-            // Close the pop-up when clicking outside or on the form's close button
-            $('#overlay').on('click', function(event) {
-                if (event.target === this) {
-                    $('#overlay, #updateBillContainer').fadeOut();
-                }
-            });
-        });        
+        });  
