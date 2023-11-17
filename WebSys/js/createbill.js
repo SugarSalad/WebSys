@@ -25,6 +25,9 @@ $(document).ready(function () {
                     console.log('Success: Bill created successfully.');
                     showMessage('Bill created successfully.', 'success');
                     $('form')[0].reset(); // Reset form inputs
+                } else if (response.status === 'error' && response.message.includes('User not found')) {
+                    console.log('Error: User not found.');
+                    showMessage('CUSTOMER NAME not found. Please check the provided name.', 'error');
                 } else {
                     console.log('Error: Unexpected response.');
                     showMessage('Failed to create bill. Please try again.', 'error');
