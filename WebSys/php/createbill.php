@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Send a JSON response indicating missing values
         header('Content-Type: application/json');
         echo json_encode(['status' => 'error', 'message' => 'Missing values. Please fill in all fields.']);
+        exit();
     } else {
         // Call the stored procedure to get UserID based on the provided name
         $getUserIDQuery = "CALL SP_GetName('$name', @userID)";
@@ -46,24 +47,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Check if the query was successful
                 if ($result) {
-                    // Send a plain text response indicating success
-                    header('Content-Type: text/plain');
-                    echo 'Bill created successfully.';
+                    // Send a JSON response indicating success
+                    header('Content-Type: application/json');
+                    echo json_encode(['status' => 'success', 'message' => 'Bill created successfully.']);
                     exit();
                 } else {
-                    // Send a plain text response indicating failure and include the error message
-                    header('Content-Type: text/plain');
-                    echo 'Error: ' . $conn->error;
+                    // Send a JSON response indicating failure and include the error message
+                    header('Content-Type: application/json');
+                    echo json_encode(['status' => 'error', 'message' => 'Error creating bill: ' . $conn->error]);
+                    exit();
                 }
             } else {
-                // Send a plain text response indicating user not found
-                header('Content-Type: text/plain');
-                echo 'User not found with the provided name.';
+                // Send a JSON response indicating user not found
+                header('Content-Type: application/json');
+                echo json_encode(['status' => 'error', 'message' => 'User not found with the provided name.']);
+                exit();
             }
         } else {
-            // Send a plain text response indicating query failure
-            header('Content-Type: text/plain');
-            echo 'Error: ' . $conn->error;
+            // Send a JSON response indicating query failure
+            header('Content-Type: application/json');
+            echo json_encode(['status' => 'error', 'message' => 'Error: ' . $conn->error]);
+            exit();
         }
     }
 }

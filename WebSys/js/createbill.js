@@ -17,21 +17,32 @@ $(document).ready(function () {
             type: 'POST',
             url: './php/createbill.php',
             data: $('form').serialize(),
+            dataType: 'json', // Ensure the expected data type is JSON
             success: function (response) {
                 console.log('Ajax response:', response); // Log the entire response
 
-                if (response.trim().toLowerCase() === 'success') {
+                if (response.status === 'success') {
                     console.log('Success: Bill created successfully.');
-                    // showMessage('Success', 'Bill created successfully.', 'success');
+                    showMessage('Bill created successfully.', 'success');
                     $('form')[0].reset(); // Reset form inputs
                 } else {
                     console.log('Error: Unexpected response.');
-                    // showMessage('Error', 'Unexpected response from the server.', 'error');
+                    showMessage('Failed to create bill. Please try again.', 'error');
                 }
             },
             error: function (xhr, status, error) {
                 console.log('Ajax error:', xhr, status, error); // Log the error details
+                showMessage('An error occurred while processing your request.', 'error');
             }
         });
     });
+
+    // Function to display popup message
+    function showMessage(message, type) {
+        if (type === 'success') {
+            alert(message); // Show a simple alert for success
+        } else {
+            alert('Error: ' + message); // Show a simple alert for error
+        }
+    }
 });
