@@ -25,12 +25,12 @@
     <input type="number" id="currentReading" name="currentReading" step="any" required><br><br>
 
     <label for="amount">Amount:</label>
-<input type="number" id="amount" name="amount" step="any" required><br><br>
+    <input type="number" id="amount" name="amount" step="any" required><br><br>
 
     <label for="status">Status:</label>
     <select id="status" name="status" required>
-        <option value="Paid">Paid</option>
         <option value="Unpaid">Unpaid</option>
+        <option value="Paid">Paid</option>
     </select><br><br>
 
     <input type="submit" name="submit" value="Create Bill">
