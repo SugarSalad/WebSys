@@ -29,7 +29,11 @@
             <h3>User Information</h3>
             <input type="text" name="name" placeholder="Full Name" required>
             <input type="text" name="houseNo" placeholder="House Number" required>
-            <input type="text" name="gender" placeholder="Gender" required>
+            <label type="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            </select><br><br>
             <input type="text" name="email" placeholder="Email Address" required>
             <button type="submit" class="submit">Submit</button><br><br>
             <button type="button" class="close-btn" onclick="closeForm()">Exit</button>
@@ -57,5 +61,26 @@
             alert('Closing form...');
         }
     </script>
+
+
+<?php
+session_start();
+
+// Check if the success message is set in the session
+if (isset($_SESSION['success_message'])) {
+    // Display JavaScript popup message
+    $successMessage = $_SESSION['success_message'];
+    echo "<script>
+            // Call the displaySuccessMessage function from the separate JavaScript file
+            displaySuccessMessage('$successMessage');
+          </script>";
+
+    // Unset the session variable to clear the message after displaying it
+    unset($_SESSION['success_message']);
+}
+?>
+
+
+
 </body>
 </html>

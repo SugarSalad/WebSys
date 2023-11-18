@@ -33,16 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $createAccountQuery = "CALL SP_CreateAccount('$username', '$password', 'User', '$name', '$houseNo', '$gender', '$email')";
         $result = $conn->query($createAccountQuery);
 
-        // Check if the query was successful
         if ($result) {
-            // Send a success message as a query parameter
-            header("Location: ../index.php?success=Account created successfully.");
+            // Set a session variable to indicate success
+            $_SESSION['success_message'] = "Account created successfully.";
+            header("Location: ../create_account.php");
             exit();
         } else {
             // Send an error message as a query parameter
             header("Location: ../create_account.php?error=Error: " . $conn->error);
             exit();
         }
+        
     }
 } else {
     // Redirect to registration page if form is not submitted
