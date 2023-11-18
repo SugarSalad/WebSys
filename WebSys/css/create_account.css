@@ -23,8 +23,7 @@ h2 {
     transform: translateX(-50%);
 }
 
-
-.login-block {
+.regAcc-block {
     width: 320px;
     position: fixed;
     padding: 50px; /* Padding increased to make the form larger */
@@ -34,16 +33,17 @@ h2 {
     margin: 0 auto;
 }
 
-.login-block h1 {
+.regAcc-block h1 {
     text-align: center;
     color: #000;
     font-size: 30px;
     text-transform: uppercase;
     margin-top: 0;
-    margin-bottom: 50px;
+    margin-bottom: 30px; /* Adjusted margin for better spacing */
 }
 
-.login-block input {
+
+.regAcc-block input {
     width: 100%;
     height: 40px; /* Increased height of the input fields */
     box-sizing: border-box;
@@ -56,11 +56,8 @@ h2 {
     outline: none;
 }
 
-.login-block input:active, .login-block input:focus {
-    border: 1px solid #ff656c;
-}
-
-.login {
+.submit,
+.close-btn {
     width: 100%;
     height: 40px;
     background: #ff656c;
@@ -76,10 +73,11 @@ h2 {
     cursor: pointer;
 }
 
-.login-block button:hover {
+.regAcc-block button:hover {
     background: #ff7b81;
 }
 
+/* Show/Hide password */
 
 .password-container {
     position: relative;
@@ -106,4 +104,3 @@ h2 {
     color: #000;
     font-size: 18px;
 }
-

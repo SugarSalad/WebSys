@@ -70,21 +70,38 @@ th {
 }
 
 /* Sidebar Button Styles */
-.sidebar-btn {
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; /* Span from top to bottom of the viewport */
+    width: 250px;
+    background-color: #333;
+    color: white;
     padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
-.sidebar-btn:hover {
+h3{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.viewReport:hover,
+.createBill:hover,
+.createAccount:hover,
+.manageAccounts:hover {
     background-color: #777;
 }
 
-.logout {
-    margin-top: auto;
-    padding: 20px;
+.viewReport,
+.createBill,
+.createAccount,
+.manageAccounts {
+    padding: 30px;
     background-color: #555;
     color: white;
     text-decoration: none;
@@ -95,4 +112,15 @@ th {
 
 .logout:hover {
     background-color: #ee0c0c;
+}
+
+.logout {
+    margin-top: auto;
+    padding: 30px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
 }

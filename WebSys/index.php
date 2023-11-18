@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
@@ -17,9 +18,18 @@
         ?>
         <form method="post" action="./php/actlogin.php">
             <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Submit</button>
+            <div class="password-container">
+                <input type="password" name="password" id="passwordField" placeholder="Password" required>
+                <button type="button" id="togglePassword">
+                    <i class="fas fa-eye-slash"></i>
+                </button>
+            </div>
+            <button type="submit" class="login">Submit</button>
         </form>
+        <br><p>Don't have an account? <a href="create_account.php">Create Account</a></p>
     </div>
+    
+<script src="./js/login.js"></script>
+
 </body>
 </html>
