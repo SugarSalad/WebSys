@@ -6,7 +6,7 @@
     session_start();
 
     // Check if the user is authenticated
-    if (!isset($_SESSION['AccountID'])) {
+    if (!isset($_SESSION['UserID'])) {
         header("Location: ../index.php");
         exit();
     }

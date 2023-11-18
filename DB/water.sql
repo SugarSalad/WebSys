@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 16, 2023 at 04:22 PM
+-- Generation Time: Nov 18, 2023 at 07:33 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `water`
+-- Database: `h20`
 --
 
 DELIMITER $$
@@ -26,7 +26,7 @@ DELIMITER $$
 -- Procedures
 --
 DROP PROCEDURE IF EXISTS `SP_CreateBill`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateBill` (IN `p_userID` INT, IN `p_date` DATE, IN `p_meter` INT, IN `p_amount` DECIMAL(10,2), IN `p_status` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateBill` (IN `p_userID` INT, IN `p_date` DATE, IN `p_meter` FLOAT, IN `p_amount` FLOAT, IN `p_status` VARCHAR(10))   BEGIN
     INSERT INTO tbl_bill (UserID, Date, Meter, Amount, Status)
     VALUES (p_userID, p_date, p_meter, p_amount, p_status);
 END$$
@@ -37,8 +37,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteBill` (IN `id` INT)   DELE
 DROP PROCEDURE IF EXISTS `SP_DisplayBill`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DisplayBill` ()   SELECT
     tbl_bill.BillID,
-    tbl_costumer.Name,
-    tbl_costumer.HouseNumber,
+    tbl_account.Name,
+    tbl_account.HouseNumber,
     tbl_bill.Date,
     tbl_bill.Meter,
     tbl_bill.Amount,
@@ -46,7 +46,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DisplayBill` ()   SELECT
 FROM
     tbl_bill
 INNER JOIN
-    tbl_costumer ON tbl_bill.UserID = tbl_costumer.UserID$$
+    tbl_account ON tbl_bill.UserID = tbl_account.UserID$$
 
 DROP PROCEDURE IF EXISTS `SP_DisplayUserBill`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DisplayUserBill` (IN `id` INT)   SELECT
@@ -55,42 +55,31 @@ tbl_bill.Date,
 tbl_bill.Amount,
 tbl_bill.Status
 FROM tbl_bill
-INNER JOIN tbl_costumer ON tbl_bill.UserID = tbl_costumer.UserID
+INNER JOIN tbl_account ON tbl_bill.UserID = tbl_account.UserID
 WHERE tbl_bill.UserID = id$$
 
 DROP PROCEDURE IF EXISTS `SP_GetAccount`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAccount` (IN `id` VARCHAR(50), IN `password` VARCHAR(255))   SELECT
-    tbl_account.AccountID,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAccount` (IN `id` VARCHAR(100), IN `password` VARCHAR(255))   SELECT
     tbl_account.UserID,
     tbl_account.Username,
     tbl_account.Password,
     tbl_account.Level,
-    tbl_costumer.Name,
-    tbl_costumer.HouseNumber,
-    tbl_costumer.Sex,
-    tbl_costumer.Email
+    tbl_account.Name,
+    tbl_account.HouseNumber,
+    tbl_account.Sex,
+    tbl_account.Email
 FROM tbl_account
-INNER JOIN tbl_costumer ON tbl_account.UserID = tbl_costumer.UserID
 WHERE tbl_account.Username = id AND tbl_account.Password = password$$
 
 DROP PROCEDURE IF EXISTS `SP_GetName`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetName` (IN `p_name` VARCHAR(255), OUT `p_userID` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetName` (IN `p_name` VARCHAR(100), OUT `p_userID` INT)   BEGIN
     SELECT UserID INTO p_userID
-    FROM tbl_costumer
+    FROM tbl_account
     WHERE Name = p_name;
 END$$
 
-DROP PROCEDURE IF EXISTS `SP_GetUser`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetUser` (IN `id` INT)   SELECT
-tbl_costumer.Name,
-tbl_costumer.HouseNumber,
-tbl_costumer.Sex,
-tbl_costumer.Email
-FROM tbl_costumer
-WHERE tbl_costumer.UserID = id$$
-
 DROP PROCEDURE IF EXISTS `SP_UpdateBill`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_UpdateBill` (IN `p_BillID` INT, IN `p_UserID` INT, IN `p_Date` DATE, IN `p_Meter` FLOAT, IN `p_Amount` FLOAT, IN `p_Status` VARCHAR(20))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_UpdateBill` (IN `p_BillID` INT, IN `p_UserID` INT, IN `p_Date` DATE, IN `p_Meter` FLOAT, IN `p_Amount` FLOAT, IN `p_Status` VARCHAR(10))   BEGIN
     UPDATE tbl_bill
     SET 
         UserID = p_UserID,
@@ -112,23 +101,25 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `tbl_account`;
 CREATE TABLE IF NOT EXISTS `tbl_account` (
-  `AccountID` int NOT NULL AUTO_INCREMENT,
-  `UserID` int NOT NULL,
-  `Username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `UserID` int NOT NULL AUTO_INCREMENT,
+  `Username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Level` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`AccountID`),
-  KEY `UserID_fk_Customer` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `Level` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `HouseNumber` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sex` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`UserID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_account`
 --
 
-INSERT INTO `tbl_account` (`AccountID`, `UserID`, `Username`, `Password`, `Level`) VALUES
-(4, 1, 'cyrus', 'pogi', 'Admin'),
-(5, 2, 'jomar', 'reyes', 'User'),
-(6, 3, 'kim', 'pao', 'User');
+INSERT INTO `tbl_account` (`UserID`, `Username`, `Password`, `Level`, `Name`, `HouseNumber`, `Sex`, `Email`) VALUES
+(1, 'cyrus', 'pogi', 'Admin', 'Cyrus E. Tapalla', '187-A', 'Male', 'cyrus@gmail.com'),
+(2, 'jomar', 'reyes', 'User', 'Jomar Reyes', '189-B', 'Male', 'jomar@gmail.com'),
+(3, 'kim', 'pao', 'User', 'Kim Paolo Cuenca', '177-C', 'Male', 'kim@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -138,66 +129,34 @@ INSERT INTO `tbl_account` (`AccountID`, `UserID`, `Username`, `Password`, `Level
 
 DROP TABLE IF EXISTS `tbl_bill`;
 CREATE TABLE IF NOT EXISTS `tbl_bill` (
-  `BillID` int NOT NULL AUTO_INCREMENT,
+  `BillId` int NOT NULL AUTO_INCREMENT,
   `UserID` int NOT NULL,
   `Date` date NOT NULL,
   `Meter` float NOT NULL,
   `Amount` float NOT NULL,
-  `Status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`BillID`),
+  `Status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`BillId`),
   KEY `UserID_fk_Bill` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_bill`
 --
 
-INSERT INTO `tbl_bill` (`BillID`, `UserID`, `Date`, `Meter`, `Amount`, `Status`) VALUES
-(8, 3, '2023-11-08', 125, 1234, 'Paid'),
-(9, 2, '2023-09-05', 126, 980.55, 'Paid'),
-(10, 3, '2023-07-04', 127, 380.32, 'Paid'),
-(75, 3, '2023-11-16', 126, 1000, 'Unpaid');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_costumer`
---
-
-DROP TABLE IF EXISTS `tbl_costumer`;
-CREATE TABLE IF NOT EXISTS `tbl_costumer` (
-  `UserID` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `HouseNumber` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Sex` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `tbl_costumer`
---
-
-INSERT INTO `tbl_costumer` (`UserID`, `Name`, `HouseNumber`, `Sex`, `Email`) VALUES
-(1, 'Cyrus E. Tapalla', '187-A', 'Male', 'cyrusthetapalla25@gmail.com'),
-(2, 'Jomar Reyes', '186-B', 'Male', 'jomar@gmail.com'),
-(3, 'Kim Paolo Cuenca', '199-C', 'Male', 'pao@gmail.com');
+INSERT INTO `tbl_bill` (`BillId`, `UserID`, `Date`, `Meter`, `Amount`, `Status`) VALUES
+(2, 3, '2023-11-16', 124, 655.22, 'Paid'),
+(3, 2, '2023-11-01', 1233, 544.66, 'Paid'),
+(4, 3, '2023-11-18', 124, 655.22, 'Paid');
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `tbl_account`
---
-ALTER TABLE `tbl_account`
-  ADD CONSTRAINT `UserID_fk_Customer` FOREIGN KEY (`UserID`) REFERENCES `tbl_costumer` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
 -- Constraints for table `tbl_bill`
 --
 ALTER TABLE `tbl_bill`
-  ADD CONSTRAINT `UserID_fk_Bill` FOREIGN KEY (`UserID`) REFERENCES `tbl_costumer` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `UserID_fk_Bill` FOREIGN KEY (`UserID`) REFERENCES `tbl_account` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
