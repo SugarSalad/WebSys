@@ -41,26 +41,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($userData) {
                 $userID = $userData['userID'];
 
-                // Call the stored procedure to create a new bill
-                $createBillQuery = "CALL SP_CreateBill($userID, '$date', $meter, $amount, '$status')";
-                $result = $conn->query($createBillQuery);
+                // Check if the user ID is valid
+                if ($userID != null) {
+                    // Call the stored procedure to create a new bill
+                    $createBillQuery = "CALL SP_CreateBill($userID, '$date', $meter, $amount, '$status')";
+                    $result = $conn->query($createBillQuery);
 
-                // Check if the query was successful
-                if ($result) {
-                    // Send a JSON response indicating success
-                    header('Content-Type: application/json');
-                    echo json_encode(['status' => 'success', 'message' => 'Bill created successfully.']);
-                    exit();
+                    // Check if the query was successful
+                    if ($result) {
+                        // Send a JSON response indicating success
+                        header('Content-Type: application/json');
+                        echo json_encode(['status' => 'success', 'message' => 'Bill created successfully.']);
+                        exit();
+                    } else {
+                        // Send a JSON response indicating failure and include the error message
+                        header('Content-Type: application/json');
+                        echo json_encode(['status' => 'error', 'message' => 'Error creating bill: ' . $conn->error]);
+                        exit();
+                    }
                 } else {
-                    // Send a JSON response indicating failure and include the error message
+                    // Send a JSON response indicating user not found
                     header('Content-Type: application/json');
-                    echo json_encode(['status' => 'error', 'message' => 'Error creating bill: ' . $conn->error]);
+                    echo json_encode(['status' => 'error', 'message' => 'User not found with the provided name.']);
                     exit();
                 }
             } else {
-                // Send a JSON response indicating user not found
+                // Send a JSON response indicating query failure
                 header('Content-Type: application/json');
-                echo json_encode(['status' => 'error', 'message' => 'User not found with the provided name.']);
+                echo json_encode(['status' => 'error', 'message' => 'Error fetching user data.']);
                 exit();
             }
         } else {
