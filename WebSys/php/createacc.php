@@ -35,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Check if the query was successful
         if ($result) {
-            // Redirect to registration page with a success message
-            header("Location: ../create_account.php?success=Account created successfully.");
+            // Send a success message as a query parameter
+            header("Location: ../index.php?success=Account created successfully.");
             exit();
         } else {
-            // Redirect to registration page with an error message
+            // Send an error message as a query parameter
             header("Location: ../create_account.php?error=Error: " . $conn->error);
             exit();
         }

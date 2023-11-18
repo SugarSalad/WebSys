@@ -6,6 +6,7 @@
     <title>Register Account</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./css/create_account.css">
+    <script src="./js/createacc.js"></script>
 </head>
 <body>
     <h2>Water Billing Management System</h2>
