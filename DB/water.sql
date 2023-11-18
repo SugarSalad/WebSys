@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 18, 2023 at 07:33 AM
+-- Generation Time: Nov 18, 2023 at 12:44 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -25,8 +25,12 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `SP_CreateAccount`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateAccount` (IN `username` VARCHAR(100), IN `password` VARCHAR(255), IN `level` VARCHAR(20), IN `name` VARCHAR(100), IN `housenum` VARCHAR(100), IN `sex` VARCHAR(20), IN `email` VARCHAR(100))   INSERT INTO tbl_account(Username, Password, Level, Name, HouseNumber, Sex, Email)
+VALUES(username, password, level, name, housenum, sex, email)$$
+
 DROP PROCEDURE IF EXISTS `SP_CreateBill`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateBill` (IN `p_userID` INT, IN `p_date` DATE, IN `p_meter` FLOAT, IN `p_amount` FLOAT, IN `p_status` VARCHAR(10))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateBill` (IN `p_userID` INT, IN `p_date` DATE, IN `p_meter` FLOAT, IN `p_amount` FLOAT, IN `p_status` VARCHAR(20))   BEGIN
     INSERT INTO tbl_bill (UserID, Date, Meter, Amount, Status)
     VALUES (p_userID, p_date, p_meter, p_amount, p_status);
 END$$
@@ -110,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
   `Sex` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_account`
@@ -119,7 +123,10 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
 INSERT INTO `tbl_account` (`UserID`, `Username`, `Password`, `Level`, `Name`, `HouseNumber`, `Sex`, `Email`) VALUES
 (1, 'cyrus', 'pogi', 'Admin', 'Cyrus E. Tapalla', '187-A', 'Male', 'cyrus@gmail.com'),
 (2, 'jomar', 'reyes', 'User', 'Jomar Reyes', '189-B', 'Male', 'jomar@gmail.com'),
-(3, 'kim', 'pao', 'User', 'Kim Paolo Cuenca', '177-C', 'Male', 'kim@gmail.com');
+(3, 'kim', 'pao', 'User', 'Kim Paolo Cuenca', '177-C', 'Male', 'kim@gmail.com'),
+(4, 'boy', 'girl', 'Admin', 'Boy Girl', '200-A', 'Male', 'boygirl@gmail.com'),
+(6, 'zhong', 'xina', 'User', 'Zhong Xina', '169-Z', 'Male', 'zhongxina@gmail.com'),
+(11, 'yow', 'yow', 'User', 'yow yow', '123-A', 'Male', 'yow@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -137,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
   `Status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`BillId`),
   KEY `UserID_fk_Bill` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_bill`
@@ -146,7 +153,8 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
 INSERT INTO `tbl_bill` (`BillId`, `UserID`, `Date`, `Meter`, `Amount`, `Status`) VALUES
 (2, 3, '2023-11-16', 124, 655.22, 'Paid'),
 (3, 2, '2023-11-01', 1233, 544.66, 'Paid'),
-(4, 3, '2023-11-18', 124, 655.22, 'Paid');
+(4, 3, '2023-11-18', 124, 655.22, 'Paid'),
+(12, 2, '2023-11-18', 556, 555.55, 'Paid');
 
 --
 -- Constraints for dumped tables
