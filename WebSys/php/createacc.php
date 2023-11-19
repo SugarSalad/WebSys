@@ -36,14 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result) {
             // Set a session variable to indicate success
             $_SESSION['success_message'] = "Account created successfully.";
-            header("Location: ../create_account.php");
+            ?>
+            <script>
+                alert('Account created successfully.');
+                window.location.href = "../index.php"; // Redirect after displaying the alert
+            </script>
+            <?php
             exit();
         } else {
             // Send an error message as a query parameter
             header("Location: ../create_account.php?error=Error: " . $conn->error);
             exit();
         }
-        
     }
 } else {
     // Redirect to registration page if form is not submitted

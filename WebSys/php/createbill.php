@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo json_encode(['status' => 'error', 'message' => 'Error creating bill: ' . $conn->error]);
                         exit();
                     }
-                } else {
+                } else { 
                     // Send a JSON response indicating user not found
                     header('Content-Type: application/json');
                     echo json_encode(['status' => 'error', 'message' => 'User not found with the provided name.']);

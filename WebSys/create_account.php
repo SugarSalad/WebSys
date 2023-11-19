@@ -6,7 +6,7 @@
     <title>Register Account</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./css/create_account.css">
-    <script src="./js/createacc.js"></script>
+    
 </head>
 <body>
     <h2>Water Billing Management System</h2>
@@ -61,26 +61,5 @@
             alert('Closing form...');
         }
     </script>
-
-
-<?php
-session_start();
-
-// Check if the success message is set in the session
-if (isset($_SESSION['success_message'])) {
-    // Display JavaScript popup message
-    $successMessage = $_SESSION['success_message'];
-    echo "<script>
-            // Call the displaySuccessMessage function from the separate JavaScript file
-            displaySuccessMessage('$successMessage');
-          </script>";
-
-    // Unset the session variable to clear the message after displaying it
-    unset($_SESSION['success_message']);
-}
-?>
-
-
-
 </body>
 </html>
