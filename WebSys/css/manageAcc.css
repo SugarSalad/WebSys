@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#content {
+    margin-left: 250px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: calc(100% - 250px); /* Adjust content width to fill remaining space */
+}
+
+#table-container {
+    max-height: calc(100vh - 140px); /* Adjust considering other elements' heights */
+    overflow-y: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    table-layout: fixed;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #777;
+}
+
+/* Sidebar Button Styles */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; /* Span from top to bottom of the viewport */
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+h3{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.viewReport:hover,
+.createBill:hover,
+.createAccount:hover,
+.manageAccounts:hover {
+    background-color: #777;
+}
+
+.viewReport,
+.createBill,
+.createAccount,
+.manageAccounts {
+    padding: 30px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.logout:hover {
+    background-color: #ee0c0c;
+}
+
+.logout {
+    margin-top: auto;
+    padding: 30px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
