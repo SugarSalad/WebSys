@@ -22,7 +22,7 @@ if (isset($_SESSION['UserID'])) {
             $row['Amount'] = '₱' . number_format($row['Amount'], 2);
 
             // Add a comma for meter when it reaches 4 digits
-            $row['Meter'] = number_format($row['Meter']);
+            $row['Meter'] = number_format($row['Meter'], 2);
 
             $billData[] = $row;
         }
