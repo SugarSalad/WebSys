@@ -7,10 +7,13 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form method="post" action="./php/updateBill.php" id="contactFrm">
+            <form method="post" action="./php/updateAccount.php" id="contactFrm">
             <div class="modal-body">
                 <!-- Form submission status -->
                 <div class="response"></div>
+
+                 <!-- Hidden input for Bill ID -->
+                 <input type="hidden" id="userID" name="userID" hidden required>
                 
                 <!-- Contact form -->
                 <div class="form-group">
