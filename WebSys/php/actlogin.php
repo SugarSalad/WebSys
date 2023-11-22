@@ -61,8 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Invalid user level.";
         }
     } else {
-        header("Location: ../index.php?error=User not found or Incorrect Username or Password");
+        header("Location: ../index.php?error=Incorrect Username or Password");
         exit();
     }
+
+    header("Location: ../index.php?error=Invalid ID or Password");
+    exit();
 }
 ?>

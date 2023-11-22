@@ -12,11 +12,10 @@
     <h2>Water Billing Management System</h2>
     <div class="login-block">
         <h1>Login</h1>
-        <?php
-        if (isset($error_message)) {
-            echo '<p class="error">' . $error_message . '</p>';
-        }
-        ?>
+        <?php if(isset($_GET['error'])) {?>
+                    <span><?php echo $_GET['error']; ?></span>
+        <?php } ?>
+
         <form method="post" action="./php/actlogin.php">
             <input type="text" name="username" placeholder="Username" required>
             <div class="password-container">
@@ -30,7 +29,6 @@
         <br><p>Don't have an account? <a href="create_account.php">Create Account</a></p>
     </div>
     
-<script src="./js/login.js"></script>
 
 </body>
 </html>

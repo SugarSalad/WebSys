@@ -36,6 +36,15 @@ h2 {
     transform: translateX(-50%);
 }
 
+span {
+    font-size: 15px;
+    color: #a50113;
+    margin-top: 10px; 
+    margin-bottom: 15px;
+    display: block; 
+    text-align: center; 
+}
+
 
 .login-block {
     width: 320px;
