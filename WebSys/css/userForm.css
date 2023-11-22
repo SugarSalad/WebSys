@@ -16,7 +16,7 @@ body{
 .whole-container {
   position:absolute;
     max-width: 70%;
-    width: 70%;
+    width: 60%;
     background: #f9f9f9;
     padding: 100px;
     border-radius: 8px;
@@ -70,13 +70,12 @@ h1{
 
 .banner {
   display:grid;
-  max-width: 70%;
   grid-template-columns: auto auto auto auto;
 }
 
 .studentInfo-text1 {
   margin-top: 50px;
-  margin-left: 50px;
+  margin-left: -50px;
  
   font-size: 18px;
   display: inline;
