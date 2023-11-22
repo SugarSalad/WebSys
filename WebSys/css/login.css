@@ -18,9 +18,8 @@ body::before {
     bottom: 0;
     left: 0;
     right: 0;
-    opacity: 0.4; /* Adjust the opacity value as needed */
+    opacity: 0.4;
 }
-
 
 
 

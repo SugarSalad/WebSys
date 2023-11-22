@@ -23,11 +23,11 @@ body {
     margin-left: 250px;
     padding: 20px;
     box-sizing: border-box;
-    width: calc(100% - 250px); /* Adjust content width to fill remaining space */
+    width: calc(100% - 250px);
 }
 
 #table-container {
-    max-height: calc(100vh - 140px); /* Adjust considering other elements' heights */
+    max-height: calc(100vh - 140px);
     overflow-y: auto;
 }
 
