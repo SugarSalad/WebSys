@@ -75,4 +75,39 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#contactFrm').submit(function (event) {
+        event.preventDefault();
+    
+        // Serialize the form data
+        var formData = $(this).serialize();
+        formData += '&userID=' + $('#userID').val(); // Change 'billID' to 'userID'
+    
+        $.ajax({
+            type: 'POST',
+            url: './php/updateAccount.php',
+            data: formData,
+            success: function (response) {
+                console.log('Ajax response:', response);
+    
+                // Show a Bootstrap modal with the response message
+                showModal(response);
+    
+                // Move this line outside if you want to log the UserID after a successful update
+                // console.log('UserID:', $('#userID').val());
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX request failed:', status, error);
+            }
+        });
+    });
+    
+    // Function to show a Bootstrap modal with a message
+    function showModal(message) {
+        // Set the message in the modal body
+        $('#modalDialog .modal-body .response').text(message);
+    
+        // Show the modal
+        $('#modalDialog').modal('show');
+    }
 });
