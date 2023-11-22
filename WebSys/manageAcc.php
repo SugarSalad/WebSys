@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/manageAcc.css">
     <link rel="stylesheet" href="./css/modal.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="./js/bill.js"></script>
+    <script src="./js/account.js"></script>
     <script src="./js/buttonFunction.js"></script>
 
 
@@ -33,7 +33,7 @@
 
     <?php
     // Include the file that displays the bill
-    require "./php/billDisplay.php";
+    require "./php/accDisplay.php";
     ?>
 
 
@@ -42,43 +42,43 @@
     <table>
         <thead>
             <tr>
-                <th>User ID</th>
+                <th>ID</th>
                 <th>Full Name</th>
                 <th>House Number</th>
                 <th>Gender</th>
                 <th>Email Address</Address></th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Level</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            
-        <?php
-            foreach ($data as $row) {
-                echo "<tr data-bill-id='" . $row['BillID'] . "' data-name='" . $row['Name'] . "' data-house-number='" . 
-                $row['HouseNumber'] . "' data-meter='" . $row['Meter'] . "' data-date='" . $row['Date'] . "' data-amount='" . 
-                $row['Amount'] . "' data-status='" . $row['Status'] . "'>";
+                <?php foreach ($data as $row): ?>
+                    <tr data-user-id="<?= $row['UserID'] ?>" data-name="<?= $row['Name'] ?>" data-house-number="<?= $row['HouseNumber'] ?>"
+                        data-gender="<?= $row['Sex'] ?>" data-email="<?= $row['Email'] ?>" data-username="<?= $row['Username'] ?>"
+                        data-password="<?= $row['Password'] ?>" data-level="<?= $row['Level'] ?>">
+                        <td><?= $row['UserID'] ?></td>
+                        <td><?= $row['Name'] ?></td>
+                        <td><?= $row['HouseNumber'] ?></td>
+                        <td><?= $row['Sex'] ?></td>
+                        <td><?= $row['Email'] ?></td>
+                        <td><?= $row['Username'] ?></td>
+                        <td><?= $row['Password'] ?></td>
+                        <td><?= $row['Level'] ?></td>
+                        <td style='text-align: center; display: flex; gap: 4px;'>
+                            <!-- Updated button data attribute to use user ID -->
+                            <button class='update-button btn btn-primary turned-button' data-user-id="<?= $row['UserID'] ?>">Update</button>
+                        </td>
+                        <td style='text-align: center; display: flex; gap: 4px;'>
+                            <button class='delete-button' data-user-id="<?= $row['UserID'] ?>">Delete</button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 
-                foreach ($row as $value) {
-                    echo "<td>$value</td>";
-                }
-
-                echo "<td style='text-align: center; display: flex; gap: 4px;'>";
-                // Inside the foreach loop in Dashboard.php
-                echo "<button class='update-button btn btn-primary turned-button' data-bill-id='" . $row['BillID'] . "'>Update</button>";
-                echo "</td>";
-
-                echo "<td style='text-align: center; display: flex; gap: 4px;'>";
-                echo "<button class='delete-button' data-bill-id='" . $row['BillID'] . "'>Delete</button>";
-                echo "</td>";
-
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
- </div>
- <script src="./js/maModal.js"></script>
+    <script src="./js/maModal.js"></script>
 </body>
 </html>
