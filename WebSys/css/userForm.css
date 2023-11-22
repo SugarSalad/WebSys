@@ -16,7 +16,7 @@ body{
 .whole-container {
   position:absolute;
     max-width: 70%;
-    width: 100%;
+    width: 70%;
     background: #f9f9f9;
     padding: 100px;
     border-radius: 8px;
