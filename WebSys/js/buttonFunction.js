@@ -82,3 +82,7 @@ for (var i = 0; i < viewReport.length; i++){
         this.className += " active";
     });
 }
+
+
+
+

@@ -46,6 +46,14 @@
                     <input type="text" id="password" name="password" required><br><br>
                 </div>
 
+                <div class="form-group">
+                <label for="lever">User-Level:</label>
+                    <select id="level" name="level" required>
+                              <option value="user">User</option>
+                              <option value="admin">Admin</option>
+                    </select><br><br>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <!-- Submit button -->

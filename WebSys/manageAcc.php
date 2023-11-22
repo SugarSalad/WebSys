@@ -71,7 +71,7 @@
                             <button class='update-button btn btn-primary turned-button' data-user-id="<?= $row['UserID'] ?>">Update</button>
                         </td>
                         <td style='text-align: center; display: flex; gap: 4px;'>
-                            <button class='delete-button' data-user-id="<?= $row['UserID'] ?>">Delete</button>
+                        <button class='delete-button' data-user-id="<?= $row['UserID'] ?>">Delete</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
