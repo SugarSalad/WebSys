@@ -1,6 +1,4 @@
 body {
-    background: url('http://i.imgur.com/Eor57Ae.jpg') no-repeat fixed center center;
-    background-size: cover;
     font-family: Montserrat;
     margin: 0;
     padding: 0;
@@ -8,14 +6,30 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    position: relative;
 }
+
+body::before {
+    content: '';
+    background: url('../image/bg.jpg') no-repeat fixed center center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.4; /* Adjust the opacity value as needed */
+}
+
+
+
 
 h2 {
     text-align: center;
-    color: white;
+    color: rgb(5, 1, 1);
     font-size: 40px;
     text-transform: uppercase;
-    margin-top: 0;
+    margin-top: 80px;
     margin-bottom: 20px;
     position: absolute;
     top: 50px;
@@ -28,7 +42,7 @@ h2 {
     width: 320px;
     position: fixed;
     padding: 50px; /* Padding increased to make the form larger */
-    background: #fff;
+    background: #ffffff;
     border-radius: 5px;
     border-top: 10px solid #ff656c;
     margin: 0 auto;
