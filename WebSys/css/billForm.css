@@ -107,8 +107,9 @@ input[type="submit"]:hover {
 }
 
 h3{
+    margin-top: 9.5%;
     text-align: center;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 600;
 }
 
@@ -123,6 +124,7 @@ h3{
 .createBill,
 .createAccount,
 .manageAccounts {
+    margin-top: 0%;
     padding: 30px;
     background-color: #555;
     color: white;
@@ -130,6 +132,10 @@ h3{
     border: none;
     cursor: pointer;
     text-align: center;
+}
+
+.viewReport{
+    margin-top: -2%;
 }
 
 .logout:hover {

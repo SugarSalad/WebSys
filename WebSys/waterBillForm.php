@@ -38,7 +38,7 @@
 </div>
 
 <div id="sidebar">
-        <h3>BILL FORM</h3><br/><br/><br/>
+        <h3>MENU</h3><br/><br/><br/>
         <button class='viewReport' id='viewReportButton'>View Report</button><br /><br/><br/>
         <button class='createBill'>Create Bill</button><br /><br/><br/>
         <button class='manageAccounts'>Manage Accounts</button><br /><br/><br/>

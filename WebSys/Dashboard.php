@@ -16,7 +16,7 @@
 </head>
 <body>
     <div id="sidebar">
-        <h2>DASHBOARD</h2><br/><br/><br/>
+        <h2>MENU</h2><br/><br/><br/>
         <button class='viewReport' id='viewReportButton'>View Report</button><br /><br/><br/>
         <button class='createBill' id='createBillButton'>Create Bill</button><br /><br/><br/>
         <button class='manageAccounts'>Manage Accounts</button><br /><br/><br/>
