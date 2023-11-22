@@ -14,7 +14,7 @@ body{
 }
 
 .whole-container {
-  position: absolute;
+  position:absolute;
     max-width: 70%;
     width: 100%;
     background: #f9f9f9;
@@ -23,8 +23,9 @@ body{
     max-height: calc(100vh - 56px);
       overflow-y: auto;
     margin:auto;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 150px;
+    margin-left: 0%;
+    margin-bottom: 0px;
     box-shadow: 10px 10px 30px grey;
     top: 35%;
     left: 50%;
@@ -33,7 +34,8 @@ body{
 
 
 h1{
-    text-align: center;
+   
+  text-align: center;
 
 }
 
