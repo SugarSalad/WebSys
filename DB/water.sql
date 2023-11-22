@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 22, 2023 at 05:36 AM
+-- Generation Time: Nov 22, 2023 at 07:53 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -90,6 +90,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetName` (IN `p_name` VARCHAR(10
     WHERE Name = p_name;
 END$$
 
+DROP PROCEDURE IF EXISTS `SP_UpdateAccount`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_UpdateAccount` (IN `id` INT, IN `username` VARCHAR(100), IN `password` VARCHAR(255), IN `level` VARCHAR(20), IN `name` VARCHAR(100), IN `housenum` VARCHAR(100), IN `sex` VARCHAR(20), IN `email` VARCHAR(100))   UPDATE tbl_account SET UserID = id, Username = username, Password = password, Level = level, Name = name, HouseNumber = housenum, Sex = sex, Email = email
+WHERE UserId = id$$
+
 DROP PROCEDURE IF EXISTS `SP_UpdateBill`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_UpdateBill` (IN `p_BillID` INT, IN `p_UserID` INT, IN `p_Date` DATE, IN `p_Meter` FLOAT, IN `p_Amount` FLOAT, IN `p_Status` VARCHAR(10))   BEGIN
     UPDATE tbl_bill
@@ -122,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
   `Sex` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_account`
@@ -130,9 +134,9 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
 
 INSERT INTO `tbl_account` (`UserID`, `Username`, `Password`, `Level`, `Name`, `HouseNumber`, `Sex`, `Email`) VALUES
 (2, 'jomar', 'reyes', 'User', 'Jomar Reyes', '189-B', 'Male', 'jomar@gmail.com'),
-(3, 'kim', 'pao', 'User', 'Kim Paolo Cuenca', '177-C', 'Male', 'kim@gmail.com'),
-(4, 'boy', 'girl', 'Admin', 'Boy Girl', '200-A', 'Male', 'boygirl@gmail.com'),
-(13, 'cyrus', 'pogi', 'Admin', 'Cyrus Tapalla', '187-A', 'Male', 'cyrus@gmail.com');
+(3, 'kim', 'panget', 'User', 'Kim Paolo Cuenca', '177-C', 'Male', 'kim@gmail.com'),
+(13, 'cyrus', 'pogi', 'Admin', 'Cyrus E. Tapalla', '187-A', 'Male', 'cyrustapalla@gmail.com'),
+(14, 'ming', 'ming', 'User', 'Ming Chou', '989-D', 'female', 'mingchou69@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -157,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
 --
 
 INSERT INTO `tbl_bill` (`BillId`, `UserID`, `Date`, `Meter`, `Amount`, `Status`) VALUES
-(2, 3, '2023-11-16', 124.55, 655.25, 'Paid'),
+(2, 3, '2023-11-16', 124.56, 655.25, 'Paid'),
 (3, 2, '2023-11-01', 1233, 544.66, 'Paid'),
 (4, 3, '2023-11-18', 124, 655.22, 'Paid'),
 (12, 2, '2023-11-18', 556, 555.55, 'Paid'),
