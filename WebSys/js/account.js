@@ -90,8 +90,12 @@ $(document).ready(function () {
             success: function (response) {
                 console.log('Ajax response:', response);
     
-                // Show a Bootstrap modal with the response message
-                showModal(response);
+                // Display the response message in a browser-native alert popup
+                showPopup(response);
+    
+                setTimeout(function () {
+                    location.reload();
+                }); 
     
                 // Move this line outside if you want to log the UserID after a successful update
                 // console.log('UserID:', $('#userID').val());
@@ -102,12 +106,9 @@ $(document).ready(function () {
         });
     });
     
-    // Function to show a Bootstrap modal with a message
-    function showModal(message) {
-        // Set the message in the modal body
-        $('#modalDialog .modal-body .response').text(message);
-    
-        // Show the modal
-        $('#modalDialog').modal('show');
+    // Function to show a browser-native alert popup with a message
+    function showPopup(message) {
+        // Show the response message in a browser-native alert
+        alert(message);
     }
 });
