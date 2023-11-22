@@ -9,7 +9,7 @@
     
 </head>
 <body>
-    <h2>Water Billing Management System</h2>
+    
     <div class="regAcc-block">
         <h1>Register Account</h1>
         <?php
