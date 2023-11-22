@@ -29,8 +29,8 @@
                 <div class="form-group">
                 <label for="gender">Gender:</label>
                     <select id="gender" name="gender" required>
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
                     </select><br><br>
                 </div>
 
@@ -52,8 +52,8 @@
                 <div class="form-group">
                 <label for="lever">User-Level:</label>
                     <select id="level" name="level" required>
-                              <option value="user">User</option>
-                              <option value="admin">Admin</option>
+                              <option value="User">User</option>
+                              <option value="Admin">Admin</option>
                     </select><br><br>
                 </div>
 
