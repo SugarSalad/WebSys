@@ -40,7 +40,7 @@
 <div id="sidebar">
         <h3>MENU</h3><br/><br/><br/>
         <button class='viewReport' id='viewReportButton'>View Report</button><br /><br/><br/>
-        <button class='createBill'>Create Bill</button><br /><br/><br/>
+        <button class='createBill active'>Create Bill</button><br /><br/><br/>
         <button class='manageAccounts'>Manage Accounts</button><br /><br/><br/>
         <a href="./php/logoutAdmin.php" class='logout'>Logout</a><br /><br/><br/>
     </div>

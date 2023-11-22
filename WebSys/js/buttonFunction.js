@@ -69,3 +69,16 @@ function closeForm() {
     window.location.href = "index.php"; // Redirects to index.php after form closure
     alert('Closing form...');
 }
+
+
+var header = document.getElementById("sidebar");
+var btns = header.getElementsByClassName("viewReport");
+for (var i = 0; i < viewReport.length; i++){
+    btns[i].addEventListener("click", function(){
+        var current =
+        document.getElementsByClassName("active");
+        current[0].className =
+        current[0].className.replace("active", "");
+        this.className += " active";
+    });
+}

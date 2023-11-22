@@ -54,10 +54,19 @@ th {
     color: white;
 }
 
+table th:first-child,
+table td:first-child {
+    width: 50px;
+}
+
+
 /* Button Styles */
-.btn {
-    padding: 10px 20px;
-    background-color: #555;
+.viewReport,
+.createBill,
+.manageAccounts  {
+    margin-top: 0%;
+    padding: 30px;
+    background-color: #f31818;
     color: white;
     text-decoration: none;
     border: none;
@@ -66,8 +75,9 @@ th {
 }
 
 .btn:hover {
-    background-color: #777;
+    background-color: #c74c4c;
 }
+
 
 /* Sidebar Button Styles */
 #sidebar {
@@ -92,14 +102,17 @@ h3{
 
 .viewReport:hover,
 .createBill:hover,
-.createAccount:hover,
 .manageAccounts:hover {
     background-color: #777;
 }
 
+.viewReport.active {
+    background-color: red;
+    color: white;
+}
+
 .viewReport,
 .createBill,
-.createAccount,
 .manageAccounts {
     padding: 30px;
     background-color: #555;

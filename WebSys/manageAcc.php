@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Account</title>
-    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/manageAcc.css">
     <link rel="stylesheet" href="./css/modal.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="./js/bill.js"></script>
@@ -19,7 +19,7 @@
         <h2>MENU</h2><br/><br/><br/>
         <button class='viewReport' id='viewReportButton'>View Report</button><br /><br/><br/>
         <button class='createBill' id='createBillButton'>Create Bill</button><br /><br/><br/>
-        <button class='manageAccounts' id='manageAccountsButton'>Manage Accounts</button><br /><br/><br/>
+        <button class='manageAccounts active' id='manageAccountsButton'>Manage Accounts</button><br /><br/><br/>
         <a href="./php/logoutAdmin.php" class='logout'>Logout</a><br /><br/><br/>
     </div>
 
@@ -42,6 +42,7 @@
     <table>
         <thead>
             <tr>
+                <th>User ID</th>
                 <th>Full Name</th>
                 <th>House Number</th>
                 <th>Gender</th>
