@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 18, 2023 at 12:44 PM
+-- Generation Time: Nov 22, 2023 at 05:36 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -35,8 +35,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateBill` (IN `p_userID` INT, 
     VALUES (p_userID, p_date, p_meter, p_amount, p_status);
 END$$
 
+DROP PROCEDURE IF EXISTS `SP_DeleteAccount`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteAccount` (IN `id` INT)   DELETE FROM tbl_account WHERE tbl_account.UserID = id$$
+
 DROP PROCEDURE IF EXISTS `SP_DeleteBill`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteBill` (IN `id` INT)   DELETE FROM tbl_bill WHERE tbl_bill.BillID = id$$
+
+DROP PROCEDURE IF EXISTS `SP_DisplayAccount`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DisplayAccount` ()   SELECT 
+UserID, Name, HouseNumber, Sex, Email, Username, Password, Level
+FROM tbl_account$$
 
 DROP PROCEDURE IF EXISTS `SP_DisplayBill`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DisplayBill` ()   SELECT
@@ -114,19 +122,17 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
   `Sex` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_account`
 --
 
 INSERT INTO `tbl_account` (`UserID`, `Username`, `Password`, `Level`, `Name`, `HouseNumber`, `Sex`, `Email`) VALUES
-(1, 'cyrus', 'pogi', 'Admin', 'Cyrus E. Tapalla', '187-A', 'Male', 'cyrus@gmail.com'),
 (2, 'jomar', 'reyes', 'User', 'Jomar Reyes', '189-B', 'Male', 'jomar@gmail.com'),
 (3, 'kim', 'pao', 'User', 'Kim Paolo Cuenca', '177-C', 'Male', 'kim@gmail.com'),
 (4, 'boy', 'girl', 'Admin', 'Boy Girl', '200-A', 'Male', 'boygirl@gmail.com'),
-(6, 'zhong', 'xina', 'User', 'Zhong Xina', '169-Z', 'Male', 'zhongxina@gmail.com'),
-(11, 'yow', 'yow', 'User', 'yow yow', '123-A', 'Male', 'yow@gmail.com');
+(13, 'cyrus', 'pogi', 'Admin', 'Cyrus Tapalla', '187-A', 'Male', 'cyrus@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -144,17 +150,19 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
   `Status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`BillId`),
   KEY `UserID_fk_Bill` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_bill`
 --
 
 INSERT INTO `tbl_bill` (`BillId`, `UserID`, `Date`, `Meter`, `Amount`, `Status`) VALUES
-(2, 3, '2023-11-16', 124, 655.22, 'Paid'),
+(2, 3, '2023-11-16', 124.55, 655.25, 'Paid'),
 (3, 2, '2023-11-01', 1233, 544.66, 'Paid'),
 (4, 3, '2023-11-18', 124, 655.22, 'Paid'),
-(12, 2, '2023-11-18', 556, 555.55, 'Paid');
+(12, 2, '2023-11-18', 556, 555.55, 'Paid'),
+(13, 3, '2023-11-21', 127.57, 1000.55, 'Paid'),
+(15, 3, '2023-11-21', 124.55, 655.25, 'Unpaid');
 
 --
 -- Constraints for dumped tables
