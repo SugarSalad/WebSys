@@ -5,37 +5,40 @@ session_start();
 // Database Connection
 require "dbCon.php";
 
-// Validation Method
-function validate($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+class BillCreator {
+    private $conn;
 
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate user input
-    $name = validate($_POST['name']);
-    $date = validate($_POST['date']);
-    $amount = validate($_POST['amount']);
-    $status = validate($_POST['status']);
-    $meter = validate($_POST['currentReading']);
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
 
-    // Check if data is empty
-    if (empty($name) || empty($date) || empty($amount) || empty($status) || empty($meter)) {
-        // Send a JSON response indicating missing values
-        header('Content-Type: application/json');
-        echo json_encode(['status' => 'error', 'message' => 'Missing values. Please fill in all fields.']);
-        exit();
-    } else {
+    private function validate($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    public function createBill($name, $date, $amount, $status, $meter) {
+        // Validate user input
+        $name = $this->validate($name);
+        $date = $this->validate($date);
+        $amount = $this->validate($amount);
+        $status = $this->validate($status);
+        $meter = $this->validate($meter);
+
+        // Check if data is empty
+        if (empty($name) || empty($date) || empty($amount) || empty($status) || empty($meter)) {
+            return ['status' => 'error', 'message' => 'Missing values. Please fill in all fields.'];
+        }
+
         // Call the stored procedure to get UserID based on the provided name
         $getUserIDQuery = "CALL SP_GetName('$name', @userID)";
-        $userResult = $conn->query($getUserIDQuery);
+        $userResult = $this->conn->query($getUserIDQuery);
 
         if ($userResult) {
             // Fetch the result of the stored procedure
-            $userIDQuery = $conn->query("SELECT @userID as userID");
+            $userIDQuery = $this->conn->query("SELECT @userID as userID");
             $userData = $userIDQuery->fetch_assoc();
 
             if ($userData) {
@@ -45,38 +48,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($userID != null) {
                     // Call the stored procedure to create a new bill
                     $createBillQuery = "CALL SP_CreateBill($userID, '$date', $meter, $amount, '$status')";
-                    $result = $conn->query($createBillQuery);
+                    $result = $this->conn->query($createBillQuery);
 
                     // Check if the query was successful
                     if ($result) {
-                        // Send a JSON response indicating success
-                        header('Content-Type: application/json');
-                        echo json_encode(['status' => 'success', 'message' => 'Bill created successfully.']);
-                        exit();
+                        return ['status' => 'success', 'message' => 'Bill created successfully.'];
                     } else {
-                        // Send a JSON response indicating failure and include the error message
-                        header('Content-Type: application/json');
-                        echo json_encode(['status' => 'error', 'message' => 'Error creating bill: ' . $conn->error]);
-                        exit();
+                        return ['status' => 'error', 'message' => 'Error creating bill: ' . $this->conn->error];
                     }
-                } else { 
-                    // Send a JSON response indicating user not found
-                    header('Content-Type: application/json');
-                    echo json_encode(['status' => 'error', 'message' => 'User not found with the provided name.']);
-                    exit();
+                } else {
+                    return ['status' => 'error', 'message' => 'User not found with the provided name.'];
                 }
             } else {
-                // Send a JSON response indicating query failure
-                header('Content-Type: application/json');
-                echo json_encode(['status' => 'error', 'message' => 'Error fetching user data.']);
-                exit();
+                return ['status' => 'error', 'message' => 'Error fetching user data.'];
             }
         } else {
-            // Send a JSON response indicating query failure
-            header('Content-Type: application/json');
-            echo json_encode(['status' => 'error', 'message' => 'Error: ' . $conn->error]);
-            exit();
+            return ['status' => 'error', 'message' => 'Error: ' . $this->conn->error];
         }
     }
+}
+
+// Create an instance of the BillCreator class
+$billCreator = new BillCreator($conn);
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate and create a new bill
+    $result = $billCreator->createBill($_POST['name'], $_POST['date'], $_POST['amount'], $_POST['status'], $_POST['currentReading']);
+
+    // Send a JSON response based on the result
+    header('Content-Type: application/json');
+    echo json_encode($result);
 }
 ?>
