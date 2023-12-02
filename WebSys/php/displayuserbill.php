@@ -1,18 +1,20 @@
 <?php
 // Database Connection
-require "dbCon.php";
+require "dbCon.php"; // Including the file for database connection
 
+// UserBillDisplay class to handle displaying user bills
 class UserBillDisplay {
     private $conn;
 
     public function __construct($conn) {
-        $this->conn = $conn;
+        $this->conn = $conn; // Assigning the database connection to the class property
     }
 
+    // Method to display bills for a specific user
     public function displayUserBills($userID) {
-        $billData = array(); // Initialize as an empty array
+        $billData = array(); // Initialize an empty array to store bill data
 
-        // Query to call the SP_DisplayUserBill stored procedure
+        // Query to call the SP_DisplayUserBill stored procedure, using the provided userID
         $sqlQuery = "CALL SP_DisplayUserBill('$userID')";
 
         // Execute the stored procedure
@@ -20,7 +22,7 @@ class UserBillDisplay {
 
         // Check if the query was successful
         if ($result) {
-            // Fetch the result as an associative array
+            // Fetch the result as an associative array and format specific fields
             while ($row = $result->fetch_assoc()) {
                 // Format the amount with peso sign and commas
                 $row['Amount'] = '₱' . number_format($row['Amount'], 2);
@@ -28,6 +30,7 @@ class UserBillDisplay {
                 // Add a comma for meter when it reaches 4 digits
                 $row['Meter'] = number_format($row['Meter'], 2);
 
+                // Add the formatted row to the bill data array
                 $billData[] = $row;
             }
         } else {
@@ -35,20 +38,20 @@ class UserBillDisplay {
             echo "Database query failed: " . $this->conn->error;
         }
 
-        return $billData;
+        return $billData; // Return the array containing user bill data
     }
 }
 
-// Create an instance of the UserBillDisplay class
+// Create an instance of the UserBillDisplay class with the database connection
 $userBillDisplay = new UserBillDisplay($conn);
 
 // Initialize variables
-$billData = array(); // Initialize as an empty array
+$billData = array(); // Initialize an empty array to store bill data
 
 if (isset($_SESSION['UserID'])) {
-    $userID = $_SESSION['UserID'];
+    $userID = $_SESSION['UserID']; // Get the UserID from the session
 
-    // Display user bills using the UserBillDisplay class
+    // Display user bills using the UserBillDisplay class for the obtained UserID
     $billData = $userBillDisplay->displayUserBills($userID);
 } else {
     // Redirect to the login page if the UserID is not set in the session

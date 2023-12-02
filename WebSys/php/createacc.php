@@ -5,6 +5,7 @@ session_start();
 // Database Connection
 require "dbCon.php";
 
+// AccountCreator class for creating new user accounts
 class AccountCreator {
     private $conn;
 
@@ -12,6 +13,7 @@ class AccountCreator {
         $this->conn = $conn;
     }
 
+    // Function to validate input data
     public function validateInput($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -19,8 +21,9 @@ class AccountCreator {
         return $data;
     }
 
+    // Function to create a new user account
     public function createAccount($username, $password, $name, $houseNo, $gender, $email) {
-        // Validate user input
+        // Validate user input to prevent attacks
         $username = $this->validateInput($username);
         $password = $this->validateInput($password);
         $name = $this->validateInput($name);
@@ -28,7 +31,7 @@ class AccountCreator {
         $gender = $this->validateInput($gender);
         $email = $this->validateInput($email);
 
-        // Check if data is empty
+        // Check if any field is empty
         if (empty($username) || empty($password) || empty($name) || empty($houseNo) || empty($gender) || empty($email)) {
             return "Missing values. Please fill in all fields.";
         } else {
@@ -37,22 +40,22 @@ class AccountCreator {
             $result = $this->conn->query($createAccountQuery);
 
             if ($result) {
-                // Set a session variable to indicate success
+                // Set a session variable to indicate successful account creation
                 $_SESSION['success_message'] = "Account created successfully.";
-                return true;
+                return true; // Return true for successful creation
             } else {
-                // Return an error message
+                // Return an error message if account creation fails
                 return "Error: " . $this->conn->error;
             }
         }
     }
 }
 
-// Check if form is submitted
+// Check if the form is submitted via POST method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $accountCreator = new AccountCreator($conn);
 
-    // Validate user input and create account
+    // Validate user input and attempt to create the account
     $errorMessage = $accountCreator->createAccount(
         $_POST['username'],
         $_POST['password'],
@@ -62,21 +65,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST['email']
     );
 
+    // Handle success or error messages after account creation
     if ($errorMessage === true) {
+        // If account creation is successful, display an alert and redirect
         ?>
         <script>
             alert('Account created successfully.');
             window.location.href = "../index.php"; // Redirect after displaying the alert
         </script>
         <?php
-        exit();
+        exit(); // Stop further execution
     } else {
-        // Redirect to registration page with an error message
+        // If there's an error during account creation, redirect with an error message
         header("Location: ../create_account.php?error=$errorMessage");
         exit();
     }
 } else {
-    // Redirect to registration page if form is not submitted
+    // Redirect to the registration page if the form is not submitted
     header("Location: ../create_account.php");
     exit();
 }

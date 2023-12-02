@@ -5,6 +5,7 @@ session_start();
 // Database Connection
 require "dbCon.php";
 
+// BillCreator class for creating new bills
 class BillCreator {
     private $conn;
 
@@ -12,6 +13,7 @@ class BillCreator {
         $this->conn = $conn;
     }
 
+    // Function to validate and sanitize input data
     private function validate($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -19,6 +21,7 @@ class BillCreator {
         return $data;
     }
 
+    // Function to create a new bill
     public function createBill($name, $date, $amount, $status, $meter) {
         // Validate user input
         $name = $this->validate($name);
@@ -27,7 +30,7 @@ class BillCreator {
         $status = $this->validate($status);
         $meter = $this->validate($meter);
 
-        // Check if data is empty
+        // Check if any field is empty
         if (empty($name) || empty($date) || empty($amount) || empty($status) || empty($meter)) {
             return ['status' => 'error', 'message' => 'Missing values. Please fill in all fields.'];
         }
@@ -71,7 +74,7 @@ class BillCreator {
 // Create an instance of the BillCreator class
 $billCreator = new BillCreator($conn);
 
-// Check if form is submitted
+// Check if the form is submitted via POST method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate and create a new bill
     $result = $billCreator->createBill($_POST['name'], $_POST['date'], $_POST['amount'], $_POST['status'], $_POST['currentReading']);

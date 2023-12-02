@@ -2,31 +2,37 @@
 // Database Connection
 require "./php/dbCon.php";
 
+// AdminBillDisplay class to handle displaying bills for admin
 class AdminBillDisplay {
     private $conn;
 
+    // Constructor to set the database connection
     public function __construct($conn) {
         $this->conn = $conn;
     }
 
+    // Method to fetch and format bill data for display
     public function displayBills() {
-        $data = array(); // Initialize as an empty array
+        $data = array(); // Initialize as an empty array to store fetched data
 
-        // Query to call the SP_DisplayBill stored procedure
+        // SQL query to call the SP_DisplayBill stored procedure
         $sqlQuery = "CALL SP_DisplayBill();";
 
-        // Execute the statement
+        // Execute the SQL statement
         $result = $this->conn->query($sqlQuery);
 
+        // Check for query execution errors
         if (!$result) {
             // Handle query error
             die("Error executing the query: " . $this->conn->error);
         }
 
-        // Fetch the data
+        // Fetch and format each row of data
         while ($row = $result->fetch_assoc()) {
+            // Format specific fields in each row using the formatRow method
             $row = $this->formatRow($row);
 
+            // Store formatted row data in the $data array
             $data[] = array(
                 'BillID' => isset($row['BillID']) ? $row['BillID'] : '',
                 'Name' => isset($row['Name']) ? $row['Name'] : '',
@@ -38,23 +44,24 @@ class AdminBillDisplay {
             );
         }
 
-        return $data;
+        return $data; // Return the fetched and formatted data
     }
 
+    // Method to format specific fields in a row of data
     private function formatRow($row) {
-        // Format the amount with peso sign and commas
+        // Format the 'Amount' field with peso sign (₱) and commas for better readability
         $row['Amount'] = '₱' . number_format($row['Amount'], 2);
 
-        // Add a comma for meter when it reaches 4 digits
+        // Add commas for better readability in 'Meter' field when it reaches 4 digits
         $row['Meter'] = number_format($row['Meter'], 2);
 
-        return $row;
+        return $row; // Return the formatted row
     }
 }
 
-// Create an instance of the BillDisplay class
+// Create an instance of the AdminBillDisplay class with the database connection
 $billDisplay = new AdminBillDisplay($conn);
 
-// Fetch data using the displayBills method
+// Fetch and format data using the displayBills method
 $data = $billDisplay->displayBills();
 ?>

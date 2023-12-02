@@ -1,16 +1,18 @@
 <?php
 // Database Connection
-require "./dbCon.php";
+require "./dbCon.php"; // Include file for database connection
 
+// AccountDeleter class to handle account deletion
 class AccountDeleter {
     private $conn;
 
     public function __construct($conn) {
-        $this->conn = $conn;
+        $this->conn = $conn; // Assign the database connection to the class property
     }
 
+    // Method to delete an account by user ID
     public function deleteAccount($userId) {
-        // Validate user input
+        // Validate user input: Ensure $userId is an integer
         $userId = filter_var($userId, FILTER_VALIDATE_INT);
 
         if ($userId === false) {
@@ -19,11 +21,11 @@ class AccountDeleter {
         }
 
         // Use a prepared statement to prevent SQL injection
-        $deleteQuery = "CALL SP_DeleteAccount(?)";
-        $stmt = $this->conn->prepare($deleteQuery);
+        $deleteQuery = "CALL SP_DeleteAccount(?)"; // SQL query using a stored procedure
+        $stmt = $this->conn->prepare($deleteQuery); // Prepare the statement
 
         if ($stmt) {
-            // Bind the parameter
+            // Bind the parameter (user ID)
             $stmt->bind_param("i", $userId);
 
             // Execute the statement
@@ -44,12 +46,12 @@ class AccountDeleter {
     }
 }
 
-// Create an instance of the AccountDeleter class
+// Create an instance of the AccountDeleter class with the database connection
 $accountDeleter = new AccountDeleter($conn);
 
-// Check if the ID parameter is set in the POST request
+// Check if the 'userId' parameter is set in the POST request
 if (isset($_POST['userId'])) {
-    // Call the deleteAccount method
+    // Call the deleteAccount method with the provided userId
     $accountDeleter->deleteAccount($_POST['userId']);
 } else {
     echo 'Invalid or missing ID parameter';
