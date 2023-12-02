@@ -5,49 +5,75 @@ session_start();
 // Database Connection
 require "dbCon.php";
 
-// Validation Method
-function validate($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+class AccountCreator {
+    private $conn;
+
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
+
+    public function validateInput($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    public function createAccount($username, $password, $name, $houseNo, $gender, $email) {
+        // Validate user input
+        $username = $this->validateInput($username);
+        $password = $this->validateInput($password);
+        $name = $this->validateInput($name);
+        $houseNo = $this->validateInput($houseNo);
+        $gender = $this->validateInput($gender);
+        $email = $this->validateInput($email);
+
+        // Check if data is empty
+        if (empty($username) || empty($password) || empty($name) || empty($houseNo) || empty($gender) || empty($email)) {
+            return "Missing values. Please fill in all fields.";
+        } else {
+            // Call the stored procedure to create the account
+            $createAccountQuery = "CALL SP_CreateAccount('$username', '$password', 'User', '$name', '$houseNo', '$gender', '$email')";
+            $result = $this->conn->query($createAccountQuery);
+
+            if ($result) {
+                // Set a session variable to indicate success
+                $_SESSION['success_message'] = "Account created successfully.";
+                return true;
+            } else {
+                // Return an error message
+                return "Error: " . $this->conn->error;
+            }
+        }
+    }
 }
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate user input
-    $username = validate($_POST['username']);
-    $password = validate($_POST['password']); 
-    $name = validate($_POST['name']);
-    $houseNo = validate($_POST['houseNo']);
-    $gender = validate($_POST['gender']);
-    $email = validate($_POST['email']);
+    $accountCreator = new AccountCreator($conn);
 
-    // Check if data is empty
-    if (empty($username) || empty($password) || empty($name) || empty($houseNo) || empty($gender) || empty($email)) {
-        // Redirect to registration page with an error message
-        header("Location: ../create_account.php?error=Missing values. Please fill in all fields.");
+    // Validate user input and create account
+    $errorMessage = $accountCreator->createAccount(
+        $_POST['username'],
+        $_POST['password'],
+        $_POST['name'],
+        $_POST['houseNo'],
+        $_POST['gender'],
+        $_POST['email']
+    );
+
+    if ($errorMessage === true) {
+        ?>
+        <script>
+            alert('Account created successfully.');
+            window.location.href = "../index.php"; // Redirect after displaying the alert
+        </script>
+        <?php
         exit();
     } else {
-        // Call the stored procedure to create the account
-        $createAccountQuery = "CALL SP_CreateAccount('$username', '$password', 'User', '$name', '$houseNo', '$gender', '$email')";
-        $result = $conn->query($createAccountQuery);
-
-        if ($result) {
-            // Set a session variable to indicate success
-            $_SESSION['success_message'] = "Account created successfully.";
-            ?>
-            <script>
-                alert('Account created successfully.');
-                window.location.href = "../index.php"; // Redirect after displaying the alert
-            </script>
-            <?php
-            exit();
-        } else {
-            // Send an error message as a query parameter
-            header("Location: ../create_account.php?error=Error: " . $conn->error);
-            exit();
-        }
+        // Redirect to registration page with an error message
+        header("Location: ../create_account.php?error=$errorMessage");
+        exit();
     }
 } else {
     // Redirect to registration page if form is not submitted
