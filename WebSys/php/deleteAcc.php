@@ -2,34 +2,55 @@
 // Database Connection
 require "./dbCon.php";
 
-// Check if the ID parameter is set and is a valid integer
-if (isset($_POST['userId']) && is_numeric($_POST['userId'])) {
-    // Sanitize the input
-    $id = intval($_POST['userId']);
+class AccountDeleter {
+    private $conn;
 
-    // Use a prepared statement to prevent SQL injection
-    $deleteQuery = "CALL SP_DeleteAccount(?)";
-    $stmt = $conn->prepare($deleteQuery);
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
 
-    if ($stmt) {
-        // Bind the parameter
-        $stmt->bind_param("i", $id);
+    public function deleteAccount($userId) {
+        // Validate user input
+        $userId = filter_var($userId, FILTER_VALIDATE_INT);
 
-        // Execute the statement
-        $stmt->execute();
-
-        // Check if the record was deleted successfully
-        if ($stmt->affected_rows > 0) {
-            echo 'Record deleted successfully';
-        } else {
-            echo 'No record found with the provided ID';
+        if ($userId === false) {
+            echo 'Invalid or missing ID parameter';
+            return;
         }
 
-        // Close the statement
-        $stmt->close();
-    } else {
-        echo 'Error preparing statement: ' . $conn->error;
+        // Use a prepared statement to prevent SQL injection
+        $deleteQuery = "CALL SP_DeleteAccount(?)";
+        $stmt = $this->conn->prepare($deleteQuery);
+
+        if ($stmt) {
+            // Bind the parameter
+            $stmt->bind_param("i", $userId);
+
+            // Execute the statement
+            $stmt->execute();
+
+            // Check if the record was deleted successfully
+            if ($stmt->affected_rows > 0) {
+                echo 'Record deleted successfully';
+            } else {
+                echo 'No record found with the provided ID';
+            }
+
+            // Close the statement
+            $stmt->close();
+        } else {
+            echo 'Error preparing statement: ' . $this->conn->error;
+        }
     }
+}
+
+// Create an instance of the AccountDeleter class
+$accountDeleter = new AccountDeleter($conn);
+
+// Check if the ID parameter is set in the POST request
+if (isset($_POST['userId'])) {
+    // Call the deleteAccount method
+    $accountDeleter->deleteAccount($_POST['userId']);
 } else {
     echo 'Invalid or missing ID parameter';
 }
