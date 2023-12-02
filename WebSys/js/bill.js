@@ -67,14 +67,18 @@ $(document).ready(function() {
             type: 'POST',
             url: './php/updateBill.php',
             data: formData,
+            dataType: 'json',  // Specify that you expect JSON in the response
             success: function (response) {
                 console.log('Ajax response:', response);
 
                 // Handle the response from the server
-                alert(response); // Display a message or update the UI as needed
-
-                // Reload the page or perform any other action after a successful update
-                location.reload();
+                if (response.status === 'success') {
+                    alert(response.message); // Display a success message
+                    // Optionally, you can perform additional actions for success
+                    location.reload();  // Reload the page after a successful update
+                } else {
+                    alert('Error: ' + response.message); // Display an error message
+                }
 
                 // Move this line inside the success callback if you want to log the BillID after a successful update
                 console.log('BillID:', $('#billID').val());
