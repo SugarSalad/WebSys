@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 22, 2023 at 07:53 AM
+-- Generation Time: Dec 03, 2023 at 02:12 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
   `Sex` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_account`
@@ -134,9 +134,8 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
 
 INSERT INTO `tbl_account` (`UserID`, `Username`, `Password`, `Level`, `Name`, `HouseNumber`, `Sex`, `Email`) VALUES
 (2, 'jomar', 'reyes', 'User', 'Jomar Reyes', '189-B', 'Male', 'jomar@gmail.com'),
-(3, 'kim', 'panget', 'User', 'Kim Paolo Cuenca', '177-C', 'Male', 'kim@gmail.com'),
-(13, 'cyrus', 'pogi', 'Admin', 'Cyrus E. Tapalla', '187-A', 'Male', 'cyrustapalla@gmail.com'),
-(14, 'ming', 'ming', 'User', 'Ming Chou', '989-D', 'female', 'mingchou69@gmail.com');
+(3, 'kim', 'pao', 'User', 'Kim Paolo Cuenca', '177-C', 'Male', 'kim@gmail.com'),
+(13, 'cyrus', 'pogi', 'Admin', 'Cyrus E. Tapalla', '187-A', 'Male', 'cyrustapalla@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -154,19 +153,17 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
   `Status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`BillId`),
   KEY `UserID_fk_Bill` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_bill`
 --
 
 INSERT INTO `tbl_bill` (`BillId`, `UserID`, `Date`, `Meter`, `Amount`, `Status`) VALUES
-(2, 3, '2023-11-16', 124.56, 655.25, 'Paid'),
+(2, 3, '2023-11-16', 124.99, 1231.44, 'Paid'),
 (3, 2, '2023-11-01', 1233, 544.66, 'Paid'),
 (4, 3, '2023-11-18', 124, 655.22, 'Paid'),
-(12, 2, '2023-11-18', 556, 555.55, 'Paid'),
-(13, 3, '2023-11-21', 127.57, 1000.55, 'Paid'),
-(15, 3, '2023-11-21', 124.55, 655.25, 'Unpaid');
+(17, 2, '2023-12-02', 300, 2000, 'Paid');
 
 --
 -- Constraints for dumped tables
@@ -176,7 +173,7 @@ INSERT INTO `tbl_bill` (`BillId`, `UserID`, `Date`, `Meter`, `Amount`, `Status`)
 -- Constraints for table `tbl_bill`
 --
 ALTER TABLE `tbl_bill`
-  ADD CONSTRAINT `UserID_fk_Bill` FOREIGN KEY (`UserID`) REFERENCES `tbl_account` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `UserID_fk_Bill` FOREIGN KEY (`UserID`) REFERENCES `tbl_account` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
