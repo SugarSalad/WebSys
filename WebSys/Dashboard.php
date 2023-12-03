@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="x-icon" href="./image/icon.png">
-    <title>DASHBOARD</title>
+    <title>Bill Report</title>
     <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="stylesheet" href="./css/modal.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

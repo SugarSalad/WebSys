@@ -36,7 +36,7 @@
 
     <!-- Main content -->
     <div id="content">
-        <h1>Pansol Rural Association Billing System</h1>
+        <h1>Pansol Rural Association Manage Account</h1>
         <!-- Table for displaying account information -->
         <table>
             <thead>
